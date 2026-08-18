@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Administration — MACHIFLIX</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080808;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 12px 30px;
+  background: rgba(8, 8, 8, 0.96);
+  border-bottom: 1px solid #222;
+  backdrop-filter: blur(14px);
+}
+
+.logo {
+  color: #ff174f;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.header-btn {
+  padding: 10px 13px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  background: #111;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.header-btn:hover {
+  border-color: #ff174f;
+  color: #fff;
+}
+
+main {
+  width: min(1200px, calc(100% - 30px));
+  margin: auto;
+  padding: 35px 0 80px;
+}
+
+.page-title {
+  margin-bottom: 30px;
+}
+
+.page-title h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+
+.page-title p {
+  margin: 0;
+  color: #666;
+  font-size: 11px;
+}
+
+.message {
+  display: none;
+  margin-bottom: 20px;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.message.show {
+  display: block;
+}
+
+.message.success {
+  border: 1px solid #145d32;
+  background: #092c18;
+  color: #62e99a;
+}
+
+.message.error {
+  border: 1px solid #63182a;
+  background: #260b12;
+  color: #ff718c;
+}
+
+.panel {
+  margin-bottom: 30px;
+  padding: 25px;
+  border: 1px solid #222;
+  border-radius: 12px;
+  background: #101010;
+}
+
+.panel-title {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  color: #777;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #292929;
+  border-radius: 7px;
+  outline: none;
+  background: #0c0c0c;
+  color: #fff;
+  font-size: 11px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #ff174f;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  min-height: 43px;
+  padding: 0 18px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  background: #171717;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  border-color: #ff174f;
+  color: #fff;
+}
+
+.btn-primary {
+  background: #ff174f;
+  border-color: #ff174f;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #ff3564;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.movie {
+  overflow: hidden;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #111;
+}
+
+.movie-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: #181818;
+}
+
+.movie-content {
+  padding: 15px;
+}
+
+.movie-title {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 13px;
+}
+
+.tag {
+  padding: 5px 7px;
+  border-radius: 10px;
+  background: #1d1d1d;
+  color: #999;
+  font-size: 8px;
+}
+
+.movie-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.movie-actions button {
+  flex: 1;
+  padding: 9px;
+  border: 1px solid #292929;
+  border-radius: 6px;
+  background: #151515;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.movie-actions button:hover {
+  border-color: #ff174f;
+  color: #fff;
+}
+
+.movie-actions .delete {
+  border-color: #5b2635;
+  background: #260b14;
+  color: #ff718c;
+}
+
+.movie-actions .delete:hover {
+  border-color: #ff174f;
+  color: #fff;
+}
+
+.loading {
+  padding: 50px;
+  text-align: center;
+  color: #555;
+  font-size: 11px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 50px;
+  border: 1px dashed #292929;
+  border-radius: 10px;
+  color: #555;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  header {
+    padding: 12px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="index.html" class="logo">MACHIFLIX</a>
+
+  <div class="header-right">
+    <a href="index.html" class="header-btn">🏠 Accueil</a>
+    <a href="profil.html" class="header-btn">👤 Profil</a>
+  </div>
+
+</header>
+
+
+<main>
+
+  <div class="page-title">
+    <h1>⚙️ Administration</h1>
+    <p>Gestion des machinimas, jeux et 18 genres.</p>
+  </div>
+
+
+  <div id="message" class="message"></div>
+
+
+  <!-- FORMULAIRE -->
+
+  <section class="panel">
+
+    <h2 id="formTitle" class="panel-title">
+      ➕ Ajouter un machinima
+    </h2>
+
+
+    <form id="movieForm">
+
+      <div class="form-grid">
+
+
+        <div class="field full">
+
+          <label for="title">TITRE</label>
+
+          <input
+            id="title"
+            type="text"
+            placeholder="Titre du machinima"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="category">
+            JEU / CATÉGORIE
+          </label>
+
+          <select id="category" required>
+
+            <option value="">
+              Choisir un jeu
+            </option>
+
+            <option value="GTA 5">
+              🎮 GTA 5
+            </option>
+
+            <option value="Roblox">
+              🟥 Roblox
+            </option>
+
+            <option value="Minecraft">
+              ⛏️ Minecraft
+            </option>
+
+            <option value="Garry's Mod">
+              🔧 Garry's Mod
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="genre">
+            GENRE
+          </label>
+
+          <select id="genre" required>
+
+            <option value="">
+              Choisir un genre
+            </option>
+
+            <option value="Action">💥 Action</option>
+            <option value="Aventure">🗺️ Aventure</option>
+            <option value="Comédie">😂 Comédie</option>
+            <option value="Horreur">👻 Horreur</option>
+            <option value="Drame">🎭 Drame</option>
+            <option value="Guerre">🔫 Guerre</option>
+            <option value="Policier">🕵️ Policier</option>
+            <option value="Mystère">🧩 Mystère</option>
+            <option value="Fantastique">🧙 Fantastique</option>
+            <option value="Science-fiction">🚀 Science-fiction</option>
+            <option value="Romance">💕 Romance</option>
+            <option value="Thriller">🎯 Thriller</option>
+            <option value="Course">🏎️ Course</option>
+            <option value="Sport">⚽ Sport</option>
+            <option value="Survie">🧟 Survie</option>
+            <option value="Parodie">🤪 Parodie</option>
+            <option value="Court-métrage">🎬 Court-métrage</option>
+            <option value="Série">📺 Série</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="year">
+            ANNÉE
+          </label>
+
+          <input
+            id="year"
+            type="number"
+            placeholder="2026"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="views">
+            VUES
+          </label>
+
+          <input
+            id="views"
+            type="number"
+            min="0"
+            value="0"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="poster_url">
+            URL DE L'AFFICHE
+          </label>
+
+          <input
+            id="poster_url"
+            type="url"
+            placeholder="https://..."
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="video_url">
+            URL DE LA VIDÉO
+          </label>
+
+          <input
+            id="video_url"
+            type="url"
+            placeholder="https://..."
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label for="description">
+            DESCRIPTION
+          </label>
+
+          <textarea
+            id="description"
+            placeholder="Description du machinima..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          id="submitButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          ➕ Ajouter le machinima
+        </button>
+
+
+        <button
+          id="cancelButton"
+          type="button"
+          class="btn"
+          style="display:none"
+        >
+          Annuler
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- LISTE DES MACHINIMAS -->
+
+  <section class="panel">
+
+    <h2 class="panel-title">
+      🎬 Machinimas
+    </h2>
+
+    <div
+      id="movies"
+      class="movies-grid"
+    >
+
+      <div class="loading">
+        Chargement...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const { createClient } = window.supabase;
+
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+const form =
+  document.getElementById("movieForm");
+
+const formTitle =
+  document.getElementById("formTitle");
+
+const submitButton =
+  document.getElementById("submitButton");
+
+const cancelButton =
+  document.getElementById("cancelButton");
+
+const moviesContainer =
+  document.getElementById("movies");
+
+const message =
+  document.getElementById("message");
+
+
+let editingId = null;
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+function showMessage(text, type) {
+
+  message.textContent = text;
+
+  message.className =
+    "message show " + type;
+
+}
+
+
+function hideMessage() {
+
+  message.className = "message";
+
+}
+
+
+/* ================================
+   VERIFIER ADMIN
+================================ */
+
+async function checkAdmin() {
+
+  try {
+
+    const {
+      data: userData,
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !userData.user) {
+
+      window.location.href =
+        "login.html?redirect=admin.html";
+
+      return false;
+
+    }
+
+
+    const user =
+      userData.user;
+
+
+    const {
+      data: profile,
+      error: profileError
+    } = await supabaseClient
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .maybeSingle();
+
+
+    if (profileError) {
+
+      console.error(profileError);
+
+      showMessage(
+        "❌ Erreur de vérification : " +
+        profileError.message,
+        "error"
+      );
+
+      return false;
+
+    }
+
+
+    if (!profile || profile.is_admin !== true) {
+
+      document.body.innerHTML = `
+
+        <div style="
+          min-height:100vh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:#080808;
+          color:#fff;
+          font-family:Arial;
+          text-align:center;
+          padding:30px;
+        ">
+
+          <div>
+
+            <div style="
+              font-size:55px;
+              margin-bottom:20px;
+            ">
+              🚫
+            </div>
+
+            <h1>
+              Accès refusé
+            </h1>
+
+            <p style="
+              color:#666;
+              font-size:12px;
+            ">
+              Cette page est réservée aux administrateurs.
+            </p>
+
+            <a
+              href="index.html"
+              style="
+                display:inline-block;
+                margin-top:20px;
+                padding:12px 18px;
+                border-radius:7px;
+                background:#ff174f;
+                color:#fff;
+                text-decoration:none;
+                font-size:11px;
+                font-weight:bold;
+              "
+            >
+              Retour à l'accueil
+            </a>
+
+          </div>
+
+        </div>
+
+      `;
+
+      return false;
+
+    }
+
+
+    return true;
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      "❌ Erreur : " + error.message,
+      "error"
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* ================================
+   CHARGER LES MACHINIMAS
+================================ */
+
+async function loadMovies() {
+
+  moviesContainer.innerHTML =
+    '<div class="loading">Chargement...</div>';
+
+
+  try {
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("machinimas")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    renderMovies(data || []);
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    moviesContainer.innerHTML = "";
+
+    showMessage(
+      "❌ Erreur de chargement : " +
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* ================================
+   AFFICHER LES MACHINIMAS
+================================ */
+
+function renderMovies(movies) {
+
+  moviesContainer.innerHTML = "";
+
+
+  if (movies.length === 0) {
+
+    moviesContainer.innerHTML =
+      '<div class="empty">' +
+      'Aucun machinima pour le moment.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  movies.forEach(function(movie) {
+
+
+    const card =
+      document.createElement("article");
+
+    card.className = "movie";
+
+
+    const image =
+      document.createElement("img");
+
+    image.className =
+      "movie-image";
+
+    image.src =
+      movie.poster_url || "";
+
+    image.alt =
+      movie.title || "Machinima";
+
+
+    const content =
+      document.createElement("div");
+
+    content.className =
+      "movie-content";
+
+
+    const title =
+      document.createElement("div");
+
+    title.className =
+      "movie-title";
+
+    title.textContent =
+      movie.title || "Sans titre";
+
+
+    const meta =
+      document.createElement("div");
+
+    meta.className =
+      "movie-meta";
+
+
+    const category =
+      document.createElement("span");
+
+    category.className =
+      "tag";
+
+    category.textContent =
+      "🎮 " +
+      (movie.category || "Sans jeu");
+
+
+    const genre =
+      document.createElement("span");
+
+    genre.className =
+      "tag";
+
+    genre.textContent =
+      "🎭 " +
+      (movie.genre || "Sans genre");
+
+
+    const views =
+      document.createElement("span");
+
+    views.className =
+      "tag";
+
+    views.textContent =
+      "👁️ " +
+      Number(movie.views || 0)
+        .toLocaleString("fr-FR");
+
+
+    meta.appendChild(category);
+    meta.appendChild(genre);
+    meta.appendChild(views);
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "movie-actions";
+
+
+    /* MODIFIER */
+
+    const editButton =
+      document.createElement("button");
+
+    editButton.type =
+      "button";
+
+    editButton.textContent =
+      "✏️ Modifier";
+
+    editButton.addEventListener(
+      "click",
+      function() {
+        editMovie(movie);
+      }
+    );
+
+
+    /* SUPPRIMER */
+
+    const deleteButton =
+      document.createElement("button");
+
+    deleteButton.type =
+      "button";
+
+    deleteButton.className =
+      "delete";
+
+    deleteButton.textContent =
+      "🗑️ Supprimer";
+
+    deleteButton.addEventListener(
+      "click",
+      function() {
+        deleteMovie(movie.id);
+      }
+    );
+
+
+    actions.appendChild(editButton);
+    actions.appendChild(deleteButton);
+
+
+    content.appendChild(title);
+    content.appendChild(meta);
+    content.appendChild(actions);
+
+
+    card.appendChild(image);
+    card.appendChild(content);
+
+
+    moviesContainer.appendChild(card);
+
+  });
+
+}
+
+
+/* ================================
+   AJOUTER / MODIFIER
+================================ */
+
+form.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    hideMessage();
+
+
+    const payload = {
+
+      title:
+        document.getElementById("title")
+          .value
+          .trim(),
+
+      category:
+        document.getElementById("category")
+          .value,
+
+      genre:
+        document.getElementById("genre")
+          .value,
+
+      year:
+        Number(
+          document.getElementById("year").value
+        ) || null,
+
+      views:
+        Number(
+          document.getElementById("views").value
+        ) || 0,
+
+      poster_url:
+        document.getElementById("poster_url")
+          .value
+          .trim() || null,
+
+      video_url:
+        document.getElementById("video_url")
+          .value
+          .trim() || null,
+
+      description:
+        document.getElementById("description")
+          .value
+          .trim() || null
+
+    };
+
+
+    if (!payload.title) {
+
+      showMessage(
+        "❌ Le titre est obligatoire.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!payload.category) {
+
+      showMessage(
+        "❌ Choisis un jeu.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!payload.genre) {
+
+      showMessage(
+        "❌ Choisis un genre.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      "⏳ Enregistrement...";
+
+
+    try {
+
+
+      /* MODIFICATION */
+
+      if (editingId !== null) {
+
+        const {
+          error
+        } = await supabaseClient
+          .from("machinimas")
+          .update(payload)
+          .eq("id", editingId);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage(
+          "✅ Machinima modifié.",
+          "success"
+        );
+
+      }
+
+
+      /* AJOUT */
+
+      else {
+
+        const {
+          error
+        } = await supabaseClient
+          .from("machinimas")
+          .insert(payload);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage(
+          "✅ Machinima ajouté.",
+          "success"
+        );
+
+      }
+
+
+      resetForm();
+
+      await loadMovies();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        "❌ Erreur : " +
+        error.message,
+        "error"
+      );
+
+
+    } finally {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        editingId !== null
+          ? "💾 Enregistrer les modifications"
+          : "➕ Ajouter le machinima";
+
+    }
+
+  }
+);
+
+
+/* ================================
+   MODIFIER
+================================ */
+
+function editMovie(movie) {
+
+  editingId =
+    movie.id;
+
+
+  formTitle.textContent =
+    "✏️ Modifier le machinima";
+
+
+  submitButton.textContent =
+    "💾 Enregistrer les modifications";
+
+
+  cancelButton.style.display =
+    "block";
+
+
+  document.getElementById("title").value =
+    movie.title || "";
+
+
+  document.getElementById("category").value =
+    movie.category || "";
+
+
+  document.getElementById("genre").value =
+    movie.genre || "";
+
+
+  document.getElementById("year").value =
+    movie.year || "";
+
+
+  document.getElementById("views").value =
+    movie.views || 0;
+
+
+  document.getElementById("poster_url").value =
+    movie.poster_url || "";
+
+
+  document.getElementById("video_url").value =
+    movie.video_url || "";
+
+
+  document.getElementById("description").value =
+    movie.description || "";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* ================================
+   ANNULER
+================================ */
+
+cancelButton.addEventListener(
+  "click",
+  resetForm
+);
+
+
+function resetForm() {
+
+  editingId = null;
+
+  form.reset();
+
+  document.getElementById("views").value =
+    "0";
+
+  formTitle.textContent =
+    "➕ Ajouter un machinima";
+
+  submitButton.textContent =
+    "➕ Ajouter le machinima";
+
+  cancelButton.style.display =
+    "none";
+
+}
+
+
+/* ================================
+   SUPPRIMER
+================================ */
+
+async function deleteMovie(id) {
+
+  const confirmation =
+    confirm(
+      "Supprimer définitivement ce machinima ?"
+    );
+
+
+  if (!confirmation) {
+    return;
+  }
+
+
+  try {
+
+    const {
+      error
+    } = await supabaseClient
+      .from("machinimas")
+      .delete()
+      .eq("id", id);
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    showMessage(
+      "✅ Machinima supprimé.",
+      "success"
+    );
+
+
+    await loadMovies();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      "❌ Erreur suppression : " +
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* ================================
+   INITIALISATION
+================================ */
+
+async function init() {
+
+  console.log(
+    "🚀 Chargement de MACHIFLIX..."
+  );
+
+
+  const isAdmin =
+    await checkAdmin();
+
+
+  if (!isAdmin) {
+    return;
+  }
+
+
+  await loadMovies();
+
+
+  console.log(
+    "✅ Administration prête."
+  );
+
+}
+
+
+/* ================================
+   LANCER
+================================ */
+
+init();
+
+</script>
+
+</body>
+</html> 
