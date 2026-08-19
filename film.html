@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Film — MACHIFLIX</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#080808;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    min-height:70px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    padding:12px 30px;
+
+    background:rgba(8,8,8,.96);
+
+    border-bottom:1px solid #222;
+
+    backdrop-filter:blur(14px);
+}
+
+.logo{
+    color:#ff174f;
+
+    text-decoration:none;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.header-right{
+    margin-left:auto;
+
+    display:flex;
+
+    gap:8px;
+}
+
+.header-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:10px 14px;
+
+    border:1px solid #333;
+
+    border-radius:7px;
+
+    background:#111;
+
+    color:#bbb;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+.header-btn:hover{
+    color:#fff;
+
+    border-color:#ff174f;
+}
+
+main{
+    width:min(1200px,calc(100% - 30px));
+
+    margin:auto;
+
+    padding:40px 0 70px;
+}
+
+.back{
+    display:inline-block;
+
+    margin-bottom:25px;
+
+    color:#666;
+
+    text-decoration:none;
+
+    font-size:11px;
+}
+
+.back:hover{
+    color:#fff;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message{
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:13px;
+
+    border-radius:8px;
+
+    font-size:11px;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.error{
+    border:1px solid #63182a;
+
+    background:#260b12;
+
+    color:#ff718c;
+}
+
+.message.success{
+    border:1px solid #145d32;
+
+    background:#092c18;
+
+    color:#62e99a;
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player{
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
+
+    border:1px solid #222;
+
+    border-radius:12px;
+
+    background:#000;
+}
+
+
+/* VIDEO FICHIER */
+
+#videoPlayer{
+    width:100%;
+    height:100%;
+
+    display:none;
+
+    object-fit:contain;
+
+    background:#000;
+}
+
+
+/* =========================================================
+   YOUTUBE
+========================================================= */
+
+.youtube-player{
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    background:#000;
+}
+
+.youtube-player img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+
+.youtube-overlay{
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(0,0,0,.25);
+
+    transition:.2s;
+}
+
+.youtube-player:hover .youtube-overlay{
+    background:rgba(0,0,0,.45);
+}
+
+.youtube-play{
+    width:80px;
+    height:56px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#ff0000;
+
+    color:#fff;
+
+    font-size:25px;
+
+    box-shadow:0 5px 25px rgba(0,0,0,.5);
+
+    transition:.2s;
+}
+
+.youtube-player:hover .youtube-play{
+    transform:scale(1.08);
+}
+
+.youtube-text{
+    position:absolute;
+
+    left:20px;
+    bottom:20px;
+
+    padding:9px 12px;
+
+    border-radius:6px;
+
+    background:rgba(0,0,0,.75);
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:bold;
+}
+
+
+/* =========================================================
+   VIDEO ABSENTE
+========================================================= */
+
+.no-video{
+    width:100%;
+    height:100%;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#555;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   CONTENU
+========================================================= */
+
+.content{
+    padding:30px 0;
+}
+
+.category{
+    display:inline-block;
+
+    margin-bottom:10px;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    background:#211017;
+
+    color:#ff718c;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+
+/* =========================================================
+   STYLES / GENRES
+========================================================= */
+
+.genres{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+
+    margin-bottom:15px;
+}
+
+.genre-tag{
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:7px 10px;
+
+    border:1px solid #3b2029;
+
+    border-radius:20px;
+
+    background:#180c10;
+
+    color:#ff718c;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+.genre-tag::before{
+    content:"🎭";
+
+    margin-right:5px;
+}
+
+
+h1{
+    margin:0 0 12px;
+
+    font-size:clamp(28px,5vw,48px);
+
+    line-height:1.1;
+}
+
+.description{
+    max-width:850px;
+
+    color:#888;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    white-space:pre-line;
+}
+
+.meta{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:20px;
+
+    color:#666;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:25px;
+}
+
+.action-btn{
+    min-height:45px;
+
+    padding:0 18px;
+
+    border:1px solid #333;
+
+    border-radius:8px;
+
+    background:#111;
+
+    color:#ddd;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    text-decoration:none;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.2s;
+}
+
+.action-btn:hover{
+    border-color:#ff174f;
+
+    color:#fff;
+}
+
+.favorite-btn{
+    border-color:#6b1730;
+
+    background:#260b14;
+
+    color:#ff718c;
+}
+
+.favorite-btn.active{
+    background:#ff174f;
+
+    border-color:#ff174f;
+
+    color:#fff;
+}
+
+.favorite-btn:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+    min-height:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#555;
+}
+
+
+/* =========================================================
+   NOT FOUND
+========================================================= */
+
+.not-found{
+    padding:70px 20px;
+
+    border:1px dashed #292929;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    color:#666;
+}
+
+.not-found h2{
+    color:#aaa;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:40px 20px;
+
+    border-top:1px solid #222;
+
+    color:#555;
+
+    text-align:center;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:12px 18px;
+    }
+
+    main{
+        padding-top:25px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .action-btn{
+        width:100%;
+    }
+
+    .youtube-play{
+        width:65px;
+        height:46px;
+
+        font-size:20px;
+    }
+
+    .youtube-text{
+        left:10px;
+        bottom:10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<a href="index.html" class="logo">
+MACHIFLIX
+</a>
+
+
+<div class="header-right">
+
+<a
+href="index.html"
+class="header-btn"
+>
+🏠 Accueil
+</a>
+
+
+<a
+id="accountButton"
+href="login.html"
+class="header-btn"
+>
+🔐 Connexion
+</a>
+
+</div>
+
+</header>
+
+
+
+<main>
+
+
+<a
+href="index.html"
+class="back"
+>
+← Retour aux films
+</a>
+
+
+
+<div
+id="message"
+class="message"
+></div>
+
+
+
+<div
+id="loading"
+class="loading"
+>
+Chargement du film...
+</div>
+
+
+
+<section
+id="filmContent"
+style="display:none;"
+>
+
+
+<!-- =====================================================
+     LECTEUR
+===================================================== -->
+
+<div class="player">
+
+
+<!-- VIDEO FICHIER -->
+
+<video
+id="videoPlayer"
+controls
+playsinline
+preload="metadata"
+>
+</video>
+
+
+<!-- YOUTUBE -->
+
+<div
+id="youtubePlayer"
+class="youtube-player"
+title="Regarder sur YouTube"
+>
+
+<img
+id="youtubeThumbnail"
+src=""
+alt="Miniature YouTube"
+>
+
+
+<div class="youtube-overlay">
+
+<div class="youtube-play">
+▶
+</div>
+
+</div>
+
+
+<div class="youtube-text">
+🔴 Regarder sur YouTube
+</div>
+
+</div>
+
+
+<!-- PAS DE VIDEO -->
+
+<div
+id="noVideo"
+class="no-video"
+>
+🎬 Vidéo indisponible
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     INFORMATIONS
+===================================================== -->
+
+<div class="content">
+
+
+<div
+id="filmCategory"
+class="category"
+style="display:none;"
+>
+</div>
+
+
+
+<div
+id="filmGenres"
+class="genres"
+>
+</div>
+
+
+
+<h1 id="filmTitle">
+—
+</h1>
+
+
+
+<div
+id="filmDescription"
+class="description"
+>
+</div>
+
+
+
+<div class="meta">
+
+<span>
+📅
+<span id="filmYear">—</span>
+</span>
+
+
+<span>
+👁️
+<span id="filmViews">0</span>
+vues
+</span>
+
+</div>
+
+
+
+<div class="actions">
+
+
+<button
+id="favoriteButton"
+class="action-btn favorite-btn"
+type="button"
+>
+❤️ Ajouter aux favoris
+</button>
+
+
+<a
+href="favoris.html"
+class="action-btn"
+>
+📚 Mes favoris
+</a>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FILM INTROUVABLE
+===================================================== -->
+
+<div
+id="notFound"
+class="not-found"
+style="display:none;"
+>
+
+<div style="font-size:45px;">
+🎬
+</div>
+
+
+<h2>
+Film introuvable
+</h2>
+
+
+<p>
+Ce machinima n'existe pas ou n'est plus disponible.
+</p>
+
+
+<a
+href="index.html"
+class="header-btn"
+>
+Retour à l'accueil
+</a>
+
+</div>
+
+
+</main>
+
+
+
+<footer>
+
+<div>
+MACHIFLIX
+</div>
+
+<div>
+La plateforme dédiée aux machinimas.
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const {
+    createClient
+} = window.supabase;
+
+
+const supabaseClient =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loading =
+    document.getElementById("loading");
+
+const filmContent =
+    document.getElementById("filmContent");
+
+const notFound =
+    document.getElementById("notFound");
+
+const message =
+    document.getElementById("message");
+
+const favoriteButton =
+    document.getElementById("favoriteButton");
+
+const accountButton =
+    document.getElementById("accountButton");
+
+const videoPlayer =
+    document.getElementById("videoPlayer");
+
+const youtubePlayer =
+    document.getElementById("youtubePlayer");
+
+const youtubeThumbnail =
+    document.getElementById("youtubeThumbnail");
+
+const noVideo =
+    document.getElementById("noVideo");
+
+
+
+/* =========================================================
+   ID DU FILM
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const filmId =
+    params.get("id");
+
+
+let currentUser = null;
+
+let currentFilm = null;
+
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text,type){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message show " +
+        type;
+}
+
+
+function hideMessage(){
+
+    message.className =
+        "message";
+}
+
+
+
+/* =========================================================
+   UTILITAIRE YOUTUBE
+========================================================= */
+
+function getYoutubeId(url){
+
+    if(!url){
+        return null;
+    }
+
+
+    try{
+
+        const parsed =
+            new URL(url);
+
+
+        /* youtube.com/watch?v= */
+
+        if(
+            parsed.hostname.includes(
+                "youtube.com"
+            )
+        ){
+
+            const id =
+                parsed.searchParams.get("v");
+
+            if(id){
+                return id;
+            }
+
+
+            /* /shorts/ID */
+
+            if(
+                parsed.pathname.startsWith(
+                    "/shorts/"
+                )
+            ){
+
+                return parsed.pathname
+                    .split("/")[2]
+                    ?.split("?")[0]
+                    || null;
+
+            }
+
+
+            /* /embed/ID */
+
+            if(
+                parsed.pathname.startsWith(
+                    "/embed/"
+                )
+            ){
+
+                return parsed.pathname
+                    .split("/")[2]
+                    ?.split("?")[0]
+                    || null;
+
+            }
+
+        }
+
+
+        /* youtu.be/ID */
+
+        if(
+            parsed.hostname ===
+            "youtu.be"
+        ){
+
+            return parsed.pathname
+                .replace("/","")
+                .split("?")[0]
+                || null;
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "URL YouTube invalide:",
+            error
+        );
+
+    }
+
+
+    return null;
+
+}
+
+
+
+/* =========================================================
+   COMPTE
+========================================================= */
+
+async function loadUser(){
+
+    try{
+
+        const {
+            data
+        } =
+            await supabaseClient
+            .auth
+            .getUser();
+
+
+        currentUser =
+            data?.user || null;
+
+
+        if(currentUser){
+
+            accountButton.href =
+                "profil.html";
+
+            accountButton.textContent =
+                "👤 Profil";
+
+        }else{
+
+            accountButton.href =
+                "login.html";
+
+            accountButton.textContent =
+                "🔐 Connexion";
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        currentUser = null;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CHARGER FILM
+========================================================= */
+
+async function loadFilm(){
+
+    if(!filmId){
+
+        showNotFound();
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("machinimas")
+        .select("*")
+        .eq("id",filmId)
+        .maybeSingle();
+
+
+    if(error){
+
+        console.error(
+            "Erreur film:",
+            error
+        );
+
+
+        showMessage(
+            "❌ Erreur : " +
+            error.message,
+            "error"
+        );
+
+
+        showNotFound();
+
+        return;
+
+    }
+
+
+    if(!data){
+
+        showNotFound();
+
+        return;
+
+    }
+
+
+    currentFilm =
+        data;
+
+
+    displayFilm(data);
+
+
+    await checkFavorite();
+
+}
+
+
+
+/* =========================================================
+   AFFICHER FILM
+========================================================= */
+
+function displayFilm(film){
+
+    document.title =
+        (
+            film.title ||
+            "Film"
+        ) +
+        " — MACHIFLIX";
+
+
+    document.getElementById(
+        "filmTitle"
+    ).textContent =
+        film.title ||
+        "Sans titre";
+
+
+    document.getElementById(
+        "filmDescription"
+    ).textContent =
+        film.description ||
+        "Aucune description.";
+
+
+    document.getElementById(
+        "filmYear"
+    ).textContent =
+        film.year ||
+        "—";
+
+
+    document.getElementById(
+        "filmViews"
+    ).textContent =
+        Number(
+            film.views || 0
+        ).toLocaleString(
+            "fr-FR"
+        );
+
+
+    /* =====================================================
+       CATEGORIE
+    ===================================================== */
+
+    const category =
+        document.getElementById(
+            "filmCategory"
+        );
+
+
+    if(film.category){
+
+        category.textContent =
+            "🎮 " +
+            film.category;
+
+        category.style.display =
+            "inline-block";
+
+    }else{
+
+        category.style.display =
+            "none";
+
+    }
+
+
+    /* =====================================================
+       PLUSIEURS GENRES
+    ===================================================== */
+
+    displayGenres(film);
+
+
+    /* =====================================================
+       VIDEO
+    ===================================================== */
+
+    displayVideo(film);
+
+
+    loading.style.display =
+        "none";
+
+
+    filmContent.style.display =
+        "block";
+
+}
+
+
+
+/* =========================================================
+   AFFICHER LES GENRES
+========================================================= */
+
+function displayGenres(film){
+
+    const container =
+        document.getElementById(
+            "filmGenres"
+        );
+
+
+    container.innerHTML = "";
+
+
+    let genres = [];
+
+
+    /*
+       NOUVEAU SYSTEME :
+
+       Si la colonne "genres"
+       existe et contient un tableau.
+    */
+
+    if(
+        Array.isArray(
+            film.genres
+        )
+    ){
+
+        genres =
+            film.genres;
+
+    }
+
+
+    /*
+       Si genres est une chaîne
+    */
+
+    else if(
+        typeof film.genres ===
+        "string" &&
+        film.genres.trim()
+    ){
+
+        genres =
+            film.genres
+            .split(",")
+            .map(function(item){
+                return item.trim();
+            })
+            .filter(Boolean);
+
+    }
+
+
+    /*
+       ANCIEN SYSTEME :
+
+       colonne "genre"
+    */
+
+    if(
+        genres.length === 0 &&
+        film.genre
+    ){
+
+        if(
+            Array.isArray(
+                film.genre
+            )
+        ){
+
+            genres =
+                film.genre;
+
+        }else{
+
+            genres =
+                String(
+                    film.genre
+                )
+                .split(",")
+                .map(function(item){
+                    return item.trim();
+                })
+                .filter(Boolean);
+
+        }
+
+    }
+
+
+    /*
+       Supprimer les doublons
+    */
+
+    genres =
+        [...new Set(
+            genres
+            .map(function(item){
+                return String(item).trim();
+            })
+            .filter(Boolean)
+        )];
+
+
+    /*
+       Affichage
+    */
+
+    genres.forEach(function(genre){
+
+        const tag =
+            document.createElement(
+                "span"
+            );
+
+        tag.className =
+            "genre-tag";
+
+        tag.textContent =
+            genre;
+
+        container.appendChild(tag);
+
+    });
+
+
+    if(genres.length === 0){
+
+        container.style.display =
+            "none";
+
+    }else{
+
+        container.style.display =
+            "flex";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   AFFICHER VIDEO
+========================================================= */
+
+function displayVideo(film){
+
+    /*
+       Compatible avec plusieurs
+       noms de colonnes.
+    */
+
+    const videoUrl =
+        film.video_url ||
+        film.video ||
+        film.url;
+
+
+    /* Reset */
+
+    videoPlayer.pause();
+
+    videoPlayer.removeAttribute(
+        "src"
+    );
+
+    videoPlayer.style.display =
+        "none";
+
+    youtubePlayer.style.display =
+        "none";
+
+    noVideo.style.display =
+        "none";
+
+
+    if(!videoUrl){
+
+        noVideo.style.display =
+            "flex";
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       YOUTUBE
+    ===================================================== */
+
+    const youtubeId =
+        getYoutubeId(videoUrl);
+
+
+    if(youtubeId){
+
+        const thumbnailUrl =
+            "https://img.youtube.com/vi/" +
+            youtubeId +
+            "/maxresdefault.jpg";
+
+
+        youtubeThumbnail.src =
+            thumbnailUrl;
+
+
+        youtubeThumbnail.onerror =
+            function(){
+
+                this.src =
+                    "https://img.youtube.com/vi/" +
+                    youtubeId +
+                    "/hqdefault.jpg";
+
+            };
+
+
+        youtubePlayer.style.display =
+            "flex";
+
+
+        /*
+           Clic sur la miniature :
+           ouverture de YouTube.
+        */
+
+        youtubePlayer.onclick =
+            function(){
+
+                window.open(
+                    "https://www.youtube.com/watch?v=" +
+                    youtubeId,
+                    "_blank",
+                    "noopener"
+                );
+
+            };
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       FICHIER VIDEO
+    ===================================================== */
+
+    videoPlayer.src =
+        videoUrl;
+
+
+    videoPlayer.style.display =
+        "block";
+
+
+    videoPlayer.load();
+
+
+    /*
+       Erreur de lecture du fichier
+    */
+
+    videoPlayer.onerror =
+        function(){
+
+            console.error(
+                "Impossible de lire la vidéo:",
+                videoUrl
+            );
+
+
+            videoPlayer.style.display =
+                "none";
+
+
+            noVideo.textContent =
+                "❌ Impossible de lire cette vidéo.";
+
+
+            noVideo.style.display =
+                "flex";
+
+        };
+
+}
+
+
+
+/* =========================================================
+   FILM INTROUVABLE
+========================================================= */
+
+function showNotFound(){
+
+    loading.style.display =
+        "none";
+
+    filmContent.style.display =
+        "none";
+
+    notFound.style.display =
+        "block";
+
+}
+
+
+
+/* =========================================================
+   FAVORI
+========================================================= */
+
+async function checkFavorite(){
+
+    if(!currentUser){
+
+        favoriteButton.textContent =
+            "🔐 Connecte-toi pour ajouter aux favoris";
+
+
+        favoriteButton.classList.remove(
+            "active"
+        );
+
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("favorites")
+        .select("id")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .eq(
+            "machinima_id",
+            currentFilm.id
+        )
+        .maybeSingle();
+
+
+    if(error){
+
+        console.error(
+            "Erreur favori:",
+            error
+        );
+
+
+        favoriteButton.textContent =
+            "❤️ Ajouter aux favoris";
+
+
+        return;
+
+    }
+
+
+    if(data){
+
+        favoriteButton.textContent =
+            "💔 Retirer des favoris";
+
+
+        favoriteButton.classList.add(
+            "active"
+        );
+
+    }else{
+
+        favoriteButton.textContent =
+            "❤️ Ajouter aux favoris";
+
+
+        favoriteButton.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   AJOUT / RETRAIT FAVORI
+========================================================= */
+
+favoriteButton.addEventListener(
+    "click",
+    async function(){
+
+        hideMessage();
+
+
+        if(!currentUser){
+
+            window.location.href =
+                "login.html?redirect=" +
+                encodeURIComponent(
+                    window.location.href
+                );
+
+
+            return;
+
+        }
+
+
+        favoriteButton.disabled =
+            true;
+
+
+        try{
+
+            const {
+                data:existing,
+                error:checkError
+            } =
+                await supabaseClient
+                .from("favorites")
+                .select("id")
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .eq(
+                    "machinima_id",
+                    currentFilm.id
+                )
+                .maybeSingle();
+
+
+            if(checkError){
+
+                throw checkError;
+
+            }
+
+
+            /* =================================================
+               RETIRER
+            ================================================= */
+
+            if(existing){
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                    .from("favorites")
+                    .delete()
+                    .eq(
+                        "id",
+                        existing.id
+                    );
+
+
+                if(error){
+
+                    throw error;
+
+                }
+
+
+                favoriteButton.textContent =
+                    "❤️ Ajouter aux favoris";
+
+
+                favoriteButton.classList.remove(
+                    "active"
+                );
+
+
+                showMessage(
+                    "Favori retiré.",
+                    "success"
+                );
+
+            }
+
+
+            /* =================================================
+               AJOUTER
+            ================================================= */
+
+            else{
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                    .from("favorites")
+                    .insert({
+
+                        user_id:
+                            currentUser.id,
+
+                        machinima_id:
+                            currentFilm.id
+
+                    });
+
+
+                if(error){
+
+                    throw error;
+
+                }
+
+
+                favoriteButton.textContent =
+                    "💔 Retirer des favoris";
+
+
+                favoriteButton.classList.add(
+                    "active"
+                );
+
+
+                showMessage(
+                    "❤️ Film ajouté aux favoris !",
+                    "success"
+                );
+
+            }
+
+
+        }catch(error){
+
+            console.error(
+                "Erreur favoris:",
+                error
+            );
+
+
+            showMessage(
+                "❌ Impossible de modifier les favoris : " +
+                error.message,
+                "error"
+            );
+
+
+        }finally{
+
+            favoriteButton.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   DEMARRAGE
+========================================================= */
+
+async function init(){
+
+    await loadUser();
+
+    await loadFilm();
+
+}
+
+
+init();
+
+</script>
+
+
+</body>
+
+</html>
