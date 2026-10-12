@@ -1,0 +1,1311 @@
+id="y7wq5a"
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Mon profil — MACHINIMA</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+
+    background:#080808;
+    color:#fff;
+
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+
+/* ================= HEADER ================= */
+
+header{
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+
+    display:flex;
+    align-items:center;
+
+    padding:12px 30px;
+
+    background:rgba(8,8,8,.96);
+
+    border-bottom:1px solid #222;
+
+    backdrop-filter:blur(14px);
+}
+
+
+.logo{
+
+    color:#ff174f;
+
+    text-decoration:none;
+
+    font-size:23px;
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+
+.header-right{
+
+    margin-left:auto;
+
+    display:flex;
+    gap:8px;
+
+    flex-wrap:wrap;
+}
+
+
+.header-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:10px 14px;
+
+    border:1px solid #333;
+
+    border-radius:7px;
+
+    background:#111;
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.header-btn:hover{
+
+    color:#fff;
+
+    border-color:#ff174f;
+
+}
+
+
+.admin-btn{
+
+    display:none;
+
+    color:#ff718c;
+
+    border-color:#5b2635;
+
+}
+
+
+/* ================= MAIN ================= */
+
+main{
+
+    width:min(
+        1000px,
+        calc(100% - 30px)
+    );
+
+    margin:auto;
+
+    padding:45px 0 80px;
+
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile-card{
+
+    overflow:hidden;
+
+    border:1px solid #222;
+
+    border-radius:14px;
+
+    background:#101010;
+
+}
+
+
+.profile-top{
+
+    padding:40px;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(255,23,79,.16),
+            transparent 40%
+        ),
+        #111;
+
+    border-bottom:1px solid #222;
+
+}
+
+
+.avatar{
+
+    width:90px;
+    height:90px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:20px;
+
+    border:2px solid #ff174f;
+
+    border-radius:50%;
+
+    background:#1a0a10;
+
+    color:#ff174f;
+
+    font-size:38px;
+    font-weight:bold;
+}
+
+
+.badge{
+
+    display:inline-block;
+
+    margin-bottom:12px;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    background:#211017;
+
+    color:#ff718c;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+}
+
+
+h1{
+
+    margin:0 0 8px;
+
+    font-size:clamp(
+        30px,
+        6vw,
+        48px
+    );
+
+}
+
+
+.email{
+
+    color:#777;
+
+    font-size:12px;
+
+}
+
+
+/* ================= STATS ================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    border-bottom:1px solid #222;
+
+}
+
+
+.stat{
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    border-right:1px solid #222;
+
+}
+
+
+.stat:last-child{
+
+    border-right:0;
+
+}
+
+
+.stat-number{
+
+    margin-bottom:7px;
+
+    color:#fff;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+.stat-label{
+
+    color:#555;
+
+    font-size:10px;
+
+}
+
+
+/* ================= ACTIONS ================= */
+
+.actions{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+    padding:30px;
+
+}
+
+
+.action{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px;
+
+    border:1px solid #292929;
+
+    border-radius:9px;
+
+    background:#111;
+
+    color:#ddd;
+
+    text-decoration:none;
+
+    transition:.2s;
+
+}
+
+
+.action:hover{
+
+    border-color:#ff174f;
+
+    transform:translateY(-2px);
+
+}
+
+
+.action-icon{
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:#1b1b1b;
+
+    font-size:18px;
+
+}
+
+
+.action-title{
+
+    margin-bottom:4px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.action-text{
+
+    color:#555;
+
+    font-size:10px;
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+.logout-area{
+
+    padding:0 30px 30px;
+
+}
+
+
+.logout-btn{
+
+    width:100%;
+
+    min-height:50px;
+
+    border:1px solid #6b1830;
+
+    border-radius:8px;
+
+    background:#260b14;
+
+    color:#ff718c;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.logout-btn:hover{
+
+    background:#ff174f;
+
+    border-color:#ff174f;
+
+    color:#fff;
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+.message{
+
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:13px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+}
+
+
+.message.show{
+
+    display:block;
+
+}
+
+
+.message.error{
+
+    border:1px solid #63182a;
+
+    background:#260b12;
+
+    color:#ff718c;
+
+}
+
+
+.message.success{
+
+    border:1px solid #145d32;
+
+    background:#092c18;
+
+    color:#62e99a;
+
+}
+
+
+/* ================= LOADING ================= */
+
+.loading{
+
+    min-height:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#555;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    padding:40px 20px;
+
+    border-top:1px solid #222;
+
+    color:#555;
+
+    text-align:center;
+
+    font-size:11px;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+    header{
+
+        padding:12px 18px;
+
+    }
+
+
+    main{
+
+        padding-top:25px;
+
+    }
+
+
+    .profile-top{
+
+        padding:30px 22px;
+
+    }
+
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .stat{
+
+        border-right:0;
+
+        border-bottom:1px solid #222;
+
+    }
+
+
+    .stat:last-child{
+
+        border-bottom:0;
+
+    }
+
+
+    .actions{
+
+        grid-template-columns:1fr;
+
+        padding:20px;
+
+    }
+
+
+    .logout-area{
+
+        padding:0 20px 20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<a
+    href="index.html"
+    class="logo"
+>
+    MACHINIMA
+</a>
+
+
+<div class="header-right">
+
+<a
+    href="index.html"
+    class="header-btn"
+>
+    🏠 Accueil
+</a>
+
+
+<a
+    href="favoris.html"
+    class="header-btn"
+>
+    ❤️ Favoris
+</a>
+
+
+<a
+    id="adminButton"
+    href="admin.html"
+    class="header-btn admin-btn"
+>
+    ⚙️ Admin
+</a>
+
+</div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+
+<div
+    id="message"
+    class="message"
+>
+</div>
+
+
+<div
+    id="loading"
+    class="loading"
+>
+    Chargement du profil...
+</div>
+
+
+<div
+    id="profileContent"
+    style="display:none;"
+>
+
+
+<div class="profile-card">
+
+
+<!-- ================= PROFILE TOP ================= -->
+
+<div class="profile-top">
+
+<div
+    id="avatar"
+    class="avatar"
+>
+    ?
+</div>
+
+
+<div
+    id="roleBadge"
+    class="badge"
+>
+    Membre
+</div>
+
+
+<h1>
+    Mon profil
+</h1>
+
+
+<div
+    id="email"
+    class="email"
+>
+    —
+</div>
+
+</div>
+
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div
+    id="favoriteCount"
+    class="stat-number"
+>
+    0
+</div>
+
+<div class="stat-label">
+    Favoris
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+    id="movieCount"
+    class="stat-number"
+>
+    0
+</div>
+
+<div class="stat-label">
+    Films disponibles
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+    id="memberDate"
+    class="stat-number"
+    style="font-size:17px;"
+>
+    —
+</div>
+
+<div class="stat-label">
+    Membre depuis
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- ================= ACTIONS ================= -->
+
+<div class="actions">
+
+
+<a
+    href="favoris.html"
+    class="action"
+>
+
+<div class="action-icon">
+    ❤️
+</div>
+
+<div>
+
+<div class="action-title">
+    Mes favoris
+</div>
+
+<div class="action-text">
+    Retrouver tes machinimas enregistrés
+</div>
+
+</div>
+
+</a>
+
+
+<a
+    href="index.html#catalogue"
+    class="action"
+>
+
+<div class="action-icon">
+    🎬
+</div>
+
+<div>
+
+<div class="action-title">
+    Catalogue
+</div>
+
+<div class="action-text">
+    Découvrir tous les machinimas
+</div>
+
+</div>
+
+</a>
+
+
+<a
+    id="adminAction"
+    href="admin.html"
+    class="action"
+    style="display:none;"
+>
+
+<div class="action-icon">
+    ⚙️
+</div>
+
+<div>
+
+<div class="action-title">
+    Administration
+</div>
+
+<div class="action-text">
+    Gérer la plateforme
+</div>
+
+</div>
+
+</a>
+
+
+</div>
+
+
+<!-- ================= LOGOUT ================= -->
+
+<div class="logout-area">
+
+<button
+    id="logoutButton"
+    class="logout-btn"
+    type="button"
+>
+    🚪 Se déconnecter
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div>
+    MACHINIMA
+</div>
+
+<div>
+    La plateforme dédiée aux machinimas.
+</div>
+
+</footer>
+
+
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const {
+    createClient
+} = window.supabase;
+
+
+const supabaseClient =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+
+const profileContent =
+    document.getElementById(
+        "profileContent"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const avatar =
+    document.getElementById(
+        "avatar"
+    );
+
+
+const email =
+    document.getElementById(
+        "email"
+    );
+
+
+const roleBadge =
+    document.getElementById(
+        "roleBadge"
+    );
+
+
+const favoriteCount =
+    document.getElementById(
+        "favoriteCount"
+    );
+
+
+const movieCount =
+    document.getElementById(
+        "movieCount"
+    );
+
+
+const memberDate =
+    document.getElementById(
+        "memberDate"
+    );
+
+
+const adminButton =
+    document.getElementById(
+        "adminButton"
+    );
+
+
+const adminAction =
+    document.getElementById(
+        "adminAction"
+    );
+
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message show " +
+        type;
+
+}
+
+
+/* =========================================================
+   PROFIL
+========================================================= */
+
+async function loadProfile(){
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .auth
+            .getUser();
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        const user =
+            data?.user;
+
+
+        if(!user){
+
+            window.location.href =
+                "login.html?redirect=profil.html";
+
+            return;
+
+        }
+
+
+        /* ================= EMAIL ================= */
+
+        email.textContent =
+            user.email ||
+            "Compte utilisateur";
+
+
+        /* ================= AVATAR ================= */
+
+        const emailFirst =
+            (
+                user.email ||
+                "?"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+
+        avatar.textContent =
+            emailFirst;
+
+
+        /* ================= DATE ================= */
+
+        if(user.created_at){
+
+            const date =
+                new Date(
+                    user.created_at
+                );
+
+
+            memberDate.textContent =
+                date.toLocaleDateString(
+                    "fr-FR",
+                    {
+                        month:"short",
+                        year:"numeric"
+                    }
+                );
+
+        }
+
+
+        /* ================= PROFILE DB ================= */
+
+        const {
+            data:profile,
+            error:profileError
+        } =
+            await supabaseClient
+            .from("profiles")
+            .select("is_admin")
+            .eq(
+                "id",
+                user.id
+            )
+            .maybeSingle();
+
+
+        const isAdmin =
+            !profileError &&
+            profile &&
+            profile.is_admin === true;
+
+
+        if(isAdmin){
+
+            roleBadge.textContent =
+                "Administrateur";
+
+
+            adminButton.style.display =
+                "inline-flex";
+
+
+            adminAction.style.display =
+                "flex";
+
+        }else{
+
+            roleBadge.textContent =
+                "Membre";
+
+
+            adminButton.style.display =
+                "none";
+
+
+            adminAction.style.display =
+                "none";
+
+        }
+
+
+        /* ================= FAVORIS ================= */
+
+        const {
+            count,
+            error:favoriteError
+        } =
+            await supabaseClient
+            .from("favorites")
+            .select(
+                "*",
+                {
+                    count:"exact",
+                    head:true
+                }
+            )
+            .eq(
+                "user_id",
+                user.id
+            );
+
+
+        if(!favoriteError){
+
+            favoriteCount.textContent =
+                count || 0;
+
+        }
+
+
+        /* ================= FILMS ================= */
+
+        const {
+            count:movies,
+            error:movieError
+        } =
+            await supabaseClient
+            .from("machinimas")
+            .select(
+                "*",
+                {
+                    count:"exact",
+                    head:true
+                }
+            );
+
+
+        if(!movieError){
+
+            movieCount.textContent =
+                movies || 0;
+
+        }
+
+
+        /* ================= AFFICHAGE ================= */
+
+        loading.style.display =
+            "none";
+
+
+        profileContent.style.display =
+            "block";
+
+
+    }catch(error){
+
+        console.error(
+            "Erreur profil:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        showMessage(
+            "❌ Impossible de charger le profil : " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DECONNEXION
+========================================================= */
+
+logoutButton.addEventListener(
+    "click",
+    async function(){
+
+        logoutButton.disabled =
+            true;
+
+
+        logoutButton.textContent =
+            "⏳ Déconnexion...";
+
+
+        try{
+
+            const {
+                error
+            } =
+                await supabaseClient
+                .auth
+                .signOut();
+
+
+            if(error){
+
+                throw error;
+
+            }
+
+
+            window.location.href =
+                "index.html";
+
+
+        }catch(error){
+
+            console.error(
+                "Erreur déconnexion:",
+                error
+            );
+
+
+            logoutButton.disabled =
+                false;
+
+
+            logoutButton.textContent =
+                "🚪 Se déconnecter";
+
+
+            showMessage(
+                "❌ Impossible de se déconnecter : " +
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+supabaseClient
+.auth
+.onAuthStateChange(
+    function(
+        event,
+        session
+    ){
+
+        if(
+            event ===
+            "SIGNED_OUT"
+        ){
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   DEMARRAGE
+========================================================= */
+
+loadProfile();
+
+</script>
+
+</body>
+
+</html>
+```
