@@ -1,0 +1,7592 @@
+<!DOCTYPE html>
+
+
+
+<html lang="fr">
+
+
+
+
+
+
+
+<head>
+
+
+
+
+
+
+
+<meta charset="UTF-8">
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+
+
+<title>Film — MACHIFLIX</title>
+
+
+
+
+
+
+
+<style>
+
+
+
+
+
+
+
+*{
+
+
+
+    box-sizing:border-box;
+
+
+
+}
+
+
+
+
+
+
+
+body{
+
+
+
+    margin:0;
+
+
+
+    background:#080808;
+
+
+
+    color:#fff;
+
+
+
+    font-family:Arial,Helvetica,sans-serif;
+
+
+
+}
+
+
+
+
+
+
+
+header{
+
+
+
+    position:sticky;
+
+
+
+    top:0;
+
+
+
+    z-index:100;
+
+
+
+
+
+
+
+    min-height:70px;
+
+
+
+
+
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    gap:15px;
+
+
+
+
+
+
+
+    padding:12px 30px;
+
+
+
+
+
+
+
+    background:rgba(8,8,8,.96);
+
+
+
+
+
+
+
+    border-bottom:1px solid #222;
+
+
+
+
+
+
+
+    backdrop-filter:blur(14px);
+
+
+
+}
+
+
+
+
+
+
+
+.logo{
+
+
+
+    color:#ff174f;
+
+
+
+
+
+
+
+    text-decoration:none;
+
+
+
+
+
+
+
+    font-size:23px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+
+
+
+
+    letter-spacing:2px;
+
+
+
+}
+
+
+
+
+
+
+
+.header-right{
+
+
+
+    margin-left:auto;
+
+
+
+
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    gap:8px;
+
+
+
+}
+
+
+
+
+
+
+
+.header-btn{
+
+
+
+    display:inline-flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    padding:10px 14px;
+
+
+
+
+
+
+
+    border:1px solid #333;
+
+
+
+
+
+
+
+    border-radius:7px;
+
+
+
+
+
+
+
+    background:#111;
+
+
+
+
+
+
+
+    color:#bbb;
+
+
+
+
+
+
+
+    text-decoration:none;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+}
+
+
+
+
+
+
+
+.header-btn:hover{
+
+
+
+    color:#fff;
+
+
+
+
+
+
+
+    border-color:#ff174f;
+
+
+
+}
+
+
+
+
+
+
+
+main{
+
+
+
+    width:min(1200px,calc(100% - 30px));
+
+
+
+
+
+
+
+    margin:auto;
+
+
+
+
+
+
+
+    padding:40px 0 70px;
+
+
+
+}
+
+
+
+
+
+
+
+.back{
+
+
+
+    display:inline-block;
+
+
+
+
+
+
+
+    margin-bottom:25px;
+
+
+
+
+
+
+
+    color:#666;
+
+
+
+
+
+
+
+    text-decoration:none;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+}
+
+
+
+
+
+
+
+.back:hover{
+
+
+
+    color:#fff;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   MESSAGES
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.message{
+
+
+
+    display:none;
+
+
+
+
+
+
+
+    margin-bottom:20px;
+
+
+
+
+
+
+
+    padding:13px;
+
+
+
+
+
+
+
+    border-radius:8px;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+}
+
+
+
+
+
+
+
+.message.show{
+
+
+
+    display:block;
+
+
+
+}
+
+
+
+
+
+
+
+.message.error{
+
+
+
+    border:1px solid #63182a;
+
+
+
+
+
+
+
+    background:#260b12;
+
+
+
+
+
+
+
+    color:#ff718c;
+
+
+
+}
+
+
+
+
+
+
+
+.message.success{
+
+
+
+    border:1px solid #145d32;
+
+
+
+
+
+
+
+    background:#092c18;
+
+
+
+
+
+
+
+    color:#62e99a;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   PLAYER
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.player{
+
+
+
+    position:relative;
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+    aspect-ratio:16/9;
+
+
+
+
+
+
+
+    overflow:hidden;
+
+
+
+
+
+
+
+    border:1px solid #222;
+
+
+
+
+
+
+
+    border-radius:12px;
+
+
+
+
+
+
+
+    background:#000;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* VIDEO FICHIER */
+
+
+
+
+
+
+
+#videoPlayer{
+
+
+
+    width:100%;
+
+
+
+    height:100%;
+
+
+
+
+
+
+
+    display:none;
+
+
+
+
+
+
+
+    object-fit:contain;
+
+
+
+
+
+
+
+    background:#000;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   YOUTUBE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.youtube-player{
+
+
+
+    position:absolute;
+
+
+
+
+
+
+
+    inset:0;
+
+
+
+
+
+
+
+    display:none;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    cursor:pointer;
+
+
+
+
+
+
+
+    background:#000;
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-player img{
+
+
+
+    width:100%;
+
+
+
+    height:100%;
+
+
+
+
+
+
+
+    display:block;
+
+
+
+
+
+
+
+    object-fit:cover;
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-overlay{
+
+
+
+    position:absolute;
+
+
+
+
+
+
+
+    inset:0;
+
+
+
+
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    background:rgba(0,0,0,.25);
+
+
+
+
+
+
+
+    transition:.2s;
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-player:hover .youtube-overlay{
+
+
+
+    background:rgba(0,0,0,.45);
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-play{
+
+
+
+    width:80px;
+
+
+
+    height:56px;
+
+
+
+
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    border-radius:14px;
+
+
+
+
+
+
+
+    background:#ff0000;
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+
+
+
+
+    font-size:25px;
+
+
+
+
+
+
+
+    box-shadow:0 5px 25px rgba(0,0,0,.5);
+
+
+
+
+
+
+
+    transition:.2s;
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-player:hover .youtube-play{
+
+
+
+    transform:scale(1.08);
+
+
+
+}
+
+
+
+
+
+
+
+.youtube-text{
+
+
+
+    position:absolute;
+
+
+
+
+
+
+
+    left:20px;
+
+
+
+    bottom:20px;
+
+
+
+
+
+
+
+    padding:9px 12px;
+
+
+
+
+
+
+
+    border-radius:6px;
+
+
+
+
+
+
+
+    background:rgba(0,0,0,.75);
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+
+
+
+
+    font-size:10px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   VIDEO ABSENTE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.no-video{
+
+
+
+    width:100%;
+
+
+
+    height:100%;
+
+
+
+
+
+
+
+    display:none;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    color:#555;
+
+
+
+
+
+
+
+    font-size:14px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   CONTENU
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.content{
+
+
+
+    padding:30px 0;
+
+
+
+}
+
+
+
+
+
+
+
+.category{
+
+
+
+    display:inline-block;
+
+
+
+
+
+
+
+    margin-bottom:10px;
+
+
+
+
+
+
+
+    padding:6px 10px;
+
+
+
+
+
+
+
+    border-radius:20px;
+
+
+
+
+
+
+
+    background:#211017;
+
+
+
+
+
+
+
+    color:#ff718c;
+
+
+
+
+
+
+
+    font-size:9px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   STYLES / GENRES
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.genres{
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    flex-wrap:wrap;
+
+
+
+
+
+
+
+    gap:7px;
+
+
+
+
+
+
+
+    margin-bottom:15px;
+
+
+
+}
+
+
+
+
+
+
+
+.genre-tag{
+
+
+
+    display:inline-flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    padding:7px 10px;
+
+
+
+
+
+
+
+    border:1px solid #3b2029;
+
+
+
+
+
+
+
+    border-radius:20px;
+
+
+
+
+
+
+
+    background:#180c10;
+
+
+
+
+
+
+
+    color:#ff718c;
+
+
+
+
+
+
+
+    font-size:9px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+}
+
+
+
+
+
+
+
+.genre-tag::before{
+
+
+
+    content:"🎭";
+
+
+
+
+
+
+
+    margin-right:5px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+h1{
+
+
+
+    margin:0 0 12px;
+
+
+
+
+
+
+
+    font-size:clamp(28px,5vw,48px);
+
+
+
+
+
+
+
+    line-height:1.1;
+
+
+
+}
+
+
+
+
+
+
+
+.description{
+
+
+
+    max-width:850px;
+
+
+
+
+
+
+
+    color:#888;
+
+
+
+
+
+
+
+    font-size:13px;
+
+
+
+
+
+
+
+    line-height:1.8;
+
+
+
+
+
+
+
+    white-space:pre-line;
+
+
+
+}
+
+
+
+
+
+
+
+.meta{
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    flex-wrap:wrap;
+
+
+
+
+
+
+
+    gap:15px;
+
+
+
+
+
+
+
+    margin-top:20px;
+
+
+
+
+
+
+
+    color:#666;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   ACTIONS
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.actions{
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    flex-wrap:wrap;
+
+
+
+
+
+
+
+    gap:10px;
+
+
+
+
+
+
+
+    margin-top:25px;
+
+
+
+}
+
+
+
+
+
+
+
+.action-btn{
+
+
+
+    min-height:45px;
+
+
+
+
+
+
+
+    padding:0 18px;
+
+
+
+
+
+
+
+    border:1px solid #333;
+
+
+
+
+
+
+
+    border-radius:8px;
+
+
+
+
+
+
+
+    background:#111;
+
+
+
+
+
+
+
+    color:#ddd;
+
+
+
+
+
+
+
+    cursor:pointer;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+
+
+
+
+    font-weight:bold;
+
+
+
+
+
+
+
+    text-decoration:none;
+
+
+
+
+
+
+
+    display:inline-flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    transition:.2s;
+
+
+
+}
+
+
+
+
+
+
+
+.action-btn:hover{
+
+
+
+    border-color:#ff174f;
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+}
+
+
+
+
+
+
+
+.favorite-btn{
+
+
+
+    border-color:#6b1730;
+
+
+
+
+
+
+
+    background:#260b14;
+
+
+
+
+
+
+
+    color:#ff718c;
+
+
+
+}
+
+
+
+
+
+
+
+.favorite-btn.active{
+
+
+
+    background:#ff174f;
+
+
+
+
+
+
+
+    border-color:#ff174f;
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+}
+
+
+
+
+
+
+
+.favorite-btn:disabled{
+
+
+
+    opacity:.6;
+
+
+
+
+
+
+
+    cursor:not-allowed;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   LOADING
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.loading{
+
+
+
+    min-height:300px;
+
+
+
+
+
+
+
+    display:flex;
+
+
+
+
+
+
+
+    align-items:center;
+
+
+
+
+
+
+
+    justify-content:center;
+
+
+
+
+
+
+
+    color:#555;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   NOT FOUND
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+.not-found{
+
+
+
+    padding:70px 20px;
+
+
+
+
+
+
+
+    border:1px dashed #292929;
+
+
+
+
+
+
+
+    border-radius:10px;
+
+
+
+
+
+
+
+    text-align:center;
+
+
+
+
+
+
+
+    color:#666;
+
+
+
+}
+
+
+
+
+
+
+
+.not-found h2{
+
+
+
+    color:#aaa;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   FOOTER
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+footer{
+
+
+
+    padding:40px 20px;
+
+
+
+
+
+
+
+    border-top:1px solid #222;
+
+
+
+
+
+
+
+    color:#555;
+
+
+
+
+
+
+
+    text-align:center;
+
+
+
+
+
+
+
+    font-size:11px;
+
+
+
+
+
+
+
+    line-height:1.8;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   MOBILE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+@media(max-width:600px){
+
+
+
+
+
+
+
+    header{
+
+
+
+        padding:12px 18px;
+
+
+
+    }
+
+
+
+
+
+
+
+    main{
+
+
+
+        padding-top:25px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .actions{
+
+
+
+        flex-direction:column;
+
+
+
+    }
+
+
+
+
+
+
+
+    .action-btn{
+
+
+
+        width:100%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .youtube-play{
+
+
+
+        width:65px;
+
+
+
+        height:46px;
+
+
+
+
+
+
+
+        font-size:20px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .youtube-text{
+
+
+
+        left:10px;
+
+
+
+        bottom:10px;
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* Épisodes individuels en cartes — thème MACHIFLIX noir et rouge */
+.series-episode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:14px 0 22px}
+.series-episode-card{display:flex;flex-direction:column;gap:0;min-width:0;padding:0;overflow:hidden;text-align:left;color:#fff;background:#111;border:1px solid #303030;border-radius:10px;cursor:pointer;transition:border-color .2s,transform .2s}
+.series-episode-card:hover,.series-episode-card:focus-visible{border-color:#ff174f;transform:translateY(-2px);outline:none}
+.series-episode-card.active{border-color:#ff174f;box-shadow:0 0 0 1px #ff174f}
+.series-episode-thumb{position:relative;width:100%;aspect-ratio:16/9;background:#1b1b1b;overflow:hidden}
+.series-episode-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.series-episode-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);font-size:32px;text-shadow:0 2px 8px #000}
+.series-episode-card:hover .series-episode-play{background:rgba(255,23,79,.28)}
+.series-episode-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:10px 11px 4px;font-size:13px;font-weight:700;line-height:1.4}
+.series-episode-number{padding:0 11px 11px;color:#aaa;font-size:12px}
+@media(max-width:600px){.series-episode-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.series-episode-title{font-size:12px;padding:8px 8px 4px}.series-episode-number{padding:0 8px 9px}}
+
+/* Séries : saisons sélectionnables */
+.series-sections{display:none;margin-top:28px;padding-top:22px;border-top:1px solid #292929}
+.series-sections h2{font-size:21px;margin:0 0 14px}
+.series-season-grid{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 14px}
+.series-season-card{flex:0 0 150px;max-width:150px;padding:0;background:#101010;border:1px solid #303030;border-radius:10px;color:#fff;text-align:left;cursor:pointer;overflow:hidden;transition:border-color .2s,transform .2s}
+.series-season-card:hover,.series-season-card.active{border-color:#ff174f;transform:translateY(-2px)}
+.series-season-card img{display:block;width:100%;height:190px;object-fit:cover;background:#191919}
+.series-season-card strong{display:block;padding:10px 11px;font-size:13px}
+.series-season-card.active strong{color:#ff426e}
+.series-episodes{margin-top:10px}
+.series-episodes h3{font-size:18px;margin:0 0 12px}
+.series-episodes-note{color:#aaa;font-size:13px;margin:0 0 12px}
+.series-playlist-launch{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:1px solid #333;border-radius:10px;background:#111;color:#fff;text-align:left;cursor:pointer}
+.series-playlist-launch:hover{border-color:#ff174f}
+.series-playlist-launch img{width:110px;height:62px;object-fit:cover;border-radius:5px}
+.series-playlist-launch span{font-size:13px;font-weight:bold}
+@media(max-width:600px){.series-season-card{flex-basis:125px}.series-season-card img{height:155px}}
+
+</style>
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+<header>
+
+
+
+
+
+
+
+<a href="index.html" class="logo">
+
+
+
+MACHIFLIX
+
+
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+<div class="header-right">
+
+
+
+
+
+
+
+<a
+
+
+
+href="index.html"
+
+
+
+class="header-btn"
+
+
+
+>
+
+
+
+🏠 Accueil
+
+
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+<a
+
+
+
+id="accountButton"
+
+
+
+href="login.html"
+
+
+
+class="header-btn"
+
+
+
+>
+
+
+
+🔐 Connexion
+
+
+
+</a>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main>
+
+
+
+
+
+
+
+
+
+
+
+<a
+
+
+
+href="index.html"
+
+
+
+class="back"
+
+
+
+>
+
+
+
+← Retour aux films
+
+
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+
+
+
+id="message"
+
+
+
+class="message"
+
+
+
+></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+
+
+
+id="loading"
+
+
+
+class="loading"
+
+
+
+>
+
+
+
+Chargement du film...
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section
+
+
+
+id="filmContent"
+
+
+
+style="display:none;"
+
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+
+
+
+     LECTEUR
+
+
+
+\===================================================== -->
+
+
+
+
+
+
+
+<div class="player">
+
+
+
+
+
+
+
+
+
+
+
+<!-- VIDEO FICHIER -->
+
+
+
+
+
+
+
+<video
+
+
+
+id="videoPlayer"
+
+
+
+controls
+
+
+
+playsinline
+
+
+
+preload="metadata"
+
+
+
+>
+
+
+
+</video>
+
+
+
+
+
+
+
+
+
+
+
+<!-- YOUTUBE -->
+
+
+
+
+
+
+
+<div
+
+
+
+id="youtubePlayer"
+
+
+
+class="youtube-player"
+
+
+
+title="Regarder sur YouTube"
+
+
+
+>
+
+
+
+
+
+
+
+<img
+
+
+
+id="youtubeThumbnail"
+
+
+
+src=""
+
+
+
+alt="Miniature YouTube"
+
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+<div class="youtube-overlay">
+
+
+
+
+
+
+
+<div class="youtube-play">
+
+
+
+▶
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="youtube-text">
+
+
+
+🔴 Regarder sur YouTube
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- PAS DE VIDEO -->
+
+
+
+
+
+
+
+<div
+
+
+
+id="noVideo"
+
+
+
+class="no-video"
+
+
+
+>
+
+
+
+🎬 Vidéo indisponible
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div id="seriesSections" class="series-sections">
+  <h2>📺 Saisons</h2>
+  <div id="seriesSeasonGrid" class="series-season-grid"></div>
+  <div id="seriesEpisodes" class="series-episodes" hidden></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+
+
+
+     INFORMATIONS
+
+
+
+\===================================================== -->
+
+
+
+
+
+
+
+<div class="content">
+
+
+
+
+
+
+
+
+
+
+
+<div
+
+
+
+id="filmCategory"
+
+
+
+class="category"
+
+
+
+style="display:none;"
+
+
+
+>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+
+
+
+id="filmGenres"
+
+
+
+class="genres"
+
+
+
+>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="filmTitle">
+
+
+
+—
+
+
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+
+
+
+id="filmDescription"
+
+
+
+class="description"
+
+
+
+>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+
+
+
+
+<span>
+
+
+
+📅
+
+
+
+<span id="filmYear">—</span>
+
+
+
+</span>
+
+
+
+
+
+
+
+
+
+
+
+<span>
+
+
+
+👁️
+
+
+
+<span id="filmViews">0</span>
+
+
+
+vues
+
+
+
+</span>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="actions">
+
+
+
+
+
+
+
+
+
+
+
+<button
+
+
+
+id="favoriteButton"
+
+
+
+class="action-btn favorite-btn"
+
+
+
+type="button"
+
+
+
+>
+
+
+
+❤️ Ajouter aux favoris
+
+
+
+</button>
+
+
+
+
+
+
+
+
+
+
+
+<a
+
+
+
+href="favoris.html"
+
+
+
+class="action-btn"
+
+
+
+>
+
+
+
+📚 Mes favoris
+
+
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+
+
+
+     FILM INTROUVABLE
+
+
+
+\===================================================== -->
+
+
+
+
+
+
+
+<div
+
+
+
+id="notFound"
+
+
+
+class="not-found"
+
+
+
+style="display:none;"
+
+
+
+>
+
+
+
+
+
+
+
+<div style="font-size:45px;">
+
+
+
+🎬
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<h2>
+
+
+
+Film introuvable
+
+
+
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+<p>
+
+
+
+Ce machinima n'existe pas ou n'est plus disponible.
+
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+<a
+
+
+
+href="index.html"
+
+
+
+class="header-btn"
+
+
+
+>
+
+
+
+Retour à l'accueil
+
+
+
+</a>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer>
+
+
+
+
+
+
+
+<div>
+
+
+
+MACHIFLIX
+
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+
+La plateforme dédiée aux machinimas.
+
+
+
+</div>
+
+
+
+
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+
+
+
+     SUPABASE
+
+
+
+\===================================================== -->
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+
+
+
+
+<script src="config.js"></script>
+<script src="youtube-views.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   SUPABASE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+const {
+
+
+
+    createClient
+
+
+
+} = window.supabase;
+
+
+
+
+
+
+
+
+
+
+
+const supabaseClient =
+
+
+
+    createClient(
+
+
+
+        SUPABASE_URL,
+
+
+
+        SUPABASE_KEY
+
+
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   ELEMENTS
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+const loading =
+
+
+
+    document.getElementById("loading");
+
+
+
+
+
+
+
+const filmContent =
+
+
+
+    document.getElementById("filmContent");
+
+
+
+
+
+
+
+const notFound =
+
+
+
+    document.getElementById("notFound");
+
+
+
+
+
+
+
+const message =
+
+
+
+    document.getElementById("message");
+
+
+
+
+
+
+
+const favoriteButton =
+
+
+
+    document.getElementById("favoriteButton");
+
+
+
+
+
+
+
+const accountButton =
+
+
+
+    document.getElementById("accountButton");
+
+
+
+
+
+
+
+const videoPlayer =
+
+
+
+    document.getElementById("videoPlayer");
+
+
+
+
+
+
+
+const youtubePlayer =
+
+
+
+    document.getElementById("youtubePlayer");
+
+
+
+
+
+
+
+const youtubeThumbnail =
+
+
+
+    document.getElementById("youtubeThumbnail");
+
+
+
+
+
+
+
+const noVideo =
+
+
+
+    document.getElementById("noVideo");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   ID DU FILM
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+const params =
+
+
+
+    new URLSearchParams(
+
+
+
+        window.location.search
+
+
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+const filmId =
+
+
+
+    params.get("id");
+
+
+
+
+
+
+
+
+
+
+
+let currentUser = null;
+
+
+
+
+
+
+
+let currentFilm = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   MESSAGE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+function showMessage(text,type){
+
+
+
+
+
+
+
+    message.textContent =
+
+
+
+        text;
+
+
+
+
+
+
+
+    message.className =
+
+
+
+        "message show " +
+
+
+
+        type;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function hideMessage(){
+
+
+
+
+
+
+
+    message.className =
+
+
+
+        "message";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   UTILITAIRE YOUTUBE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+function getYoutubeId(url){
+
+
+
+
+
+
+
+    if(!url){
+
+
+
+        return null;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    try{
+
+
+
+
+
+
+
+        const parsed =
+
+
+
+            new URL(url);
+
+
+
+
+
+
+
+
+
+
+
+        /* youtube.com/watch?v= */
+
+
+
+
+
+
+
+        if(
+
+
+
+            parsed.hostname.includes(
+
+
+
+                "youtube.com"
+
+
+
+            )
+
+
+
+        ){
+
+
+
+
+
+
+
+            const id =
+
+
+
+                parsed.searchParams.get("v");
+
+
+
+
+
+
+
+            if(id){
+
+
+
+                return id;
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            /* /shorts/ID */
+
+
+
+
+
+
+
+            if(
+
+
+
+                parsed.pathname.startsWith(
+
+
+
+                    "/shorts/"
+
+
+
+                )
+
+
+
+            ){
+
+
+
+
+
+
+
+                return parsed.pathname
+
+
+
+                    .split("/")[2]
+
+
+
+                    ?.split("?")[0]
+
+
+
+                    || null;
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            /* /embed/ID */
+
+
+
+
+
+
+
+            if(
+
+
+
+                parsed.pathname.startsWith(
+
+
+
+                    "/embed/"
+
+
+
+                )
+
+
+
+            ){
+
+
+
+
+
+
+
+                return parsed.pathname
+
+
+
+                    .split("/")[2]
+
+
+
+                    ?.split("?")[0]
+
+
+
+                    || null;
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /* youtu.be/ID */
+
+
+
+
+
+
+
+        if(
+
+
+
+            parsed.hostname ===
+
+
+
+            "youtu.be"
+
+
+
+        ){
+
+
+
+
+
+
+
+            return parsed.pathname
+
+
+
+                .replace("/","")
+
+
+
+                .split("?")[0]
+
+
+
+                || null;
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }catch(error){
+
+
+
+
+
+
+
+        console.error(
+
+
+
+            "URL YouTube invalide:",
+
+
+
+            error
+
+
+
+        );
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    return null;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   COMPTE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+async function loadUser(){
+
+
+
+
+
+
+
+    try{
+
+
+
+
+
+
+
+        const {
+
+
+
+            data
+
+
+
+        } =
+
+
+
+            await supabaseClient
+
+
+
+            .auth
+
+
+
+            .getUser();
+
+
+
+
+
+
+
+
+
+
+
+        currentUser =
+
+
+
+            data?.user || null;
+
+
+
+
+
+
+
+
+
+
+
+        if(currentUser){
+
+
+
+
+
+
+
+            accountButton.href =
+
+
+
+                "profil.html";
+
+
+
+
+
+
+
+            accountButton.textContent =
+
+
+
+                "👤 Profil";
+
+
+
+
+
+
+
+        }else{
+
+
+
+
+
+
+
+            accountButton.href =
+
+
+
+                "login.html";
+
+
+
+
+
+
+
+            accountButton.textContent =
+
+
+
+                "🔐 Connexion";
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }catch(error){
+
+
+
+
+
+
+
+        console.error(error);
+
+
+
+
+
+
+
+        currentUser = null;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   CHARGER FILM
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+async function loadFilm(){
+
+
+
+
+
+
+
+    if(!filmId){
+
+
+
+
+
+
+
+        showNotFound();
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    const {
+
+
+
+        data,
+
+
+
+        error
+
+
+
+    } =
+
+
+
+        await supabaseClient
+
+
+
+        .from("machinimas")
+
+
+
+        .select("*")
+
+
+
+        .eq("id",filmId)
+
+
+
+        .maybeSingle();
+
+
+
+
+
+
+
+
+
+
+
+    if(error){
+
+
+
+
+
+
+
+        console.error(
+
+
+
+            "Erreur film:",
+
+
+
+            error
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+        showMessage(
+
+
+
+            "❌ Erreur : " +
+
+
+
+            error.message,
+
+
+
+            "error"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+        showNotFound();
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    if(!data){
+
+
+
+
+
+
+
+        showNotFound();
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    currentFilm = data;
+
+    // Actualise le compteur affiché sans écrire dans Supabase.
+    if (typeof window.syncYouTubeViews === "function") {
+        const synced = await window.syncYouTubeViews([currentFilm]);
+        currentFilm = synced[0] || currentFilm;
+    }
+
+    displayFilm(currentFilm);
+    await loadSeriesSeasonsForPage(currentFilm);
+
+
+
+
+
+
+
+
+
+
+
+    await checkFavorite();
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   AFFICHER FILM
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+function displayFilm(film){
+
+
+
+
+
+
+
+    document.title =
+
+
+
+        (
+
+
+
+            film.title ||
+
+
+
+            "Film"
+
+
+
+        ) +
+
+
+
+        " — MACHIFLIX";
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById(
+
+
+
+        "filmTitle"
+
+
+
+    ).textContent =
+
+
+
+        film.title ||
+
+
+
+        "Sans titre";
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById(
+
+
+
+        "filmDescription"
+
+
+
+    ).textContent =
+
+
+
+        film.description ||
+
+
+
+        "Aucune description.";
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById(
+
+
+
+        "filmYear"
+
+
+
+    ).textContent =
+
+
+
+        film.year ||
+
+
+
+        "—";
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById(
+
+
+
+        "filmViews"
+
+
+
+    ).textContent =
+
+
+
+        Number(
+
+
+
+            film.views || 0
+
+
+
+        ).toLocaleString(
+
+
+
+            "fr-FR"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+    /* =====================================================
+
+
+
+       CATEGORIE
+
+
+
+    ===================================================== */
+
+
+
+
+
+
+
+    const category =
+
+
+
+        document.getElementById(
+
+
+
+            "filmCategory"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+    if(film.category){
+
+
+
+
+
+
+
+        category.textContent =
+
+
+
+            "🎮 " +
+
+
+
+            film.category;
+
+
+
+
+
+
+
+        category.style.display =
+
+
+
+            "inline-block";
+
+
+
+
+
+
+
+    }else{
+
+
+
+
+
+
+
+        category.style.display =
+
+
+
+            "none";
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /* =====================================================
+
+
+
+       PLUSIEURS GENRES
+
+
+
+    ===================================================== */
+
+
+
+
+
+
+
+    displayGenres(film);
+
+
+
+
+
+
+
+
+
+
+
+    /* =====================================================
+
+
+
+       VIDEO
+
+
+
+    ===================================================== */
+
+
+
+
+
+
+
+    displayVideo(film);
+
+
+
+
+
+
+
+
+
+
+
+    loading.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+
+
+
+
+    filmContent.style.display =
+
+
+
+        "block";
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   AFFICHER LES GENRES
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+function displayGenres(film){
+
+
+
+
+
+
+
+    const container =
+
+
+
+        document.getElementById(
+
+
+
+            "filmGenres"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+    container.innerHTML = "";
+
+
+
+
+
+
+
+
+
+
+
+    let genres = [];
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       NOUVEAU SYSTEME :
+
+
+
+
+
+
+
+       Si la colonne "genres"
+
+
+
+       existe et contient un tableau.
+
+
+
+    */
+
+
+
+
+
+
+
+    if(
+
+
+
+        Array.isArray(
+
+
+
+            film.genres
+
+
+
+        )
+
+
+
+    ){
+
+
+
+
+
+
+
+        genres =
+
+
+
+            film.genres;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       Si genres est une chaîne
+
+
+
+    */
+
+
+
+
+
+
+
+    else if(
+
+
+
+        typeof film.genres ===
+
+
+
+        "string" &&
+
+
+
+        film.genres.trim()
+
+
+
+    ){
+
+
+
+
+
+
+
+        genres =
+
+
+
+            film.genres
+
+
+
+            .split(",")
+
+
+
+            .map(function(item){
+
+
+
+                return item.trim();
+
+
+
+            })
+
+
+
+            .filter(Boolean);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       ANCIEN SYSTEME :
+
+
+
+
+
+
+
+       colonne "genre"
+
+
+
+    */
+
+
+
+
+
+
+
+    if(
+
+
+
+        genres.length === 0 &&
+
+
+
+        film.genre
+
+
+
+    ){
+
+
+
+
+
+
+
+        if(
+
+
+
+            Array.isArray(
+
+
+
+                film.genre
+
+
+
+            )
+
+
+
+        ){
+
+
+
+
+
+
+
+            genres =
+
+
+
+                film.genre;
+
+
+
+
+
+
+
+        }else{
+
+
+
+
+
+
+
+            genres =
+
+
+
+                String(
+
+
+
+                    film.genre
+
+
+
+                )
+
+
+
+                .split(",")
+
+
+
+                .map(function(item){
+
+
+
+                    return item.trim();
+
+
+
+                })
+
+
+
+                .filter(Boolean);
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       Supprimer les doublons
+
+
+
+    */
+
+
+
+
+
+
+
+    genres =
+
+
+
+        [...new Set(
+
+
+
+            genres
+
+
+
+            .map(function(item){
+
+
+
+                return String(item).trim();
+
+
+
+            })
+
+
+
+            .filter(Boolean)
+
+
+
+        )];
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       Affichage
+
+
+
+    */
+
+
+
+
+
+
+
+    genres.forEach(function(genre){
+
+
+
+
+
+
+
+        const tag =
+
+
+
+            document.createElement(
+
+
+
+                "span"
+
+
+
+            );
+
+
+
+
+
+
+
+        tag.className =
+
+
+
+            "genre-tag";
+
+
+
+
+
+
+
+        tag.textContent =
+
+
+
+            genre;
+
+
+
+
+
+
+
+        container.appendChild(tag);
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+    if(genres.length === 0){
+
+
+
+
+
+
+
+        container.style.display =
+
+
+
+            "none";
+
+
+
+
+
+
+
+    }else{
+
+
+
+
+
+
+
+        container.style.display =
+
+
+
+            "flex";
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   AFFICHER VIDEO
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+function displayVideo(film){
+
+
+
+
+
+
+
+    /*
+
+
+
+       Compatible avec plusieurs
+
+
+
+       noms de colonnes.
+
+
+
+    */
+
+
+
+
+
+
+
+    const videoUrl =
+
+
+
+        film.video_url ||
+
+
+
+        film.video ||
+
+
+
+        film.url;
+
+
+
+
+
+
+
+
+
+
+
+    /* Reset */
+
+
+
+
+
+
+
+    videoPlayer.pause();
+
+
+
+
+
+
+
+    videoPlayer.removeAttribute(
+
+
+
+        "src"
+
+
+
+    );
+
+
+
+
+
+
+
+    videoPlayer.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+    youtubePlayer.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+    noVideo.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+
+
+
+
+    if(!videoUrl){
+
+
+
+
+
+
+
+        noVideo.style.display =
+
+
+
+            "flex";
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /* =====================================================
+
+
+
+       YOUTUBE
+
+
+
+    ===================================================== */
+
+
+
+
+
+
+
+    const youtubeId = getYoutubeId(videoUrl);
+
+    let playlistUrl = null;
+
+    try {
+
+        const parsedVideoUrl = new URL(videoUrl);
+
+        const playlistId = parsedVideoUrl.searchParams.get("list");
+
+        if (playlistId && (parsedVideoUrl.hostname === "youtube.com" || parsedVideoUrl.hostname.endsWith(".youtube.com") || parsedVideoUrl.hostname === "youtu.be")) {
+
+            playlistUrl = "https://www.youtube.com/playlist?list=" + encodeURIComponent(playlistId);
+
+        }
+
+    } catch (error) {
+
+        console.warn("URL vidéo invalide:", error);
+
+    }
+
+
+
+    // Une URL de playlist peut contenir une vidéo (v=...) ou la playlist seule.
+
+    if (youtubeId || playlistUrl) {
+
+        if (youtubeId) {
+
+            youtubeThumbnail.src = "https://img.youtube.com/vi/" + youtubeId + "/maxresdefault.jpg";
+
+            youtubeThumbnail.onerror = function () {
+
+                this.onerror = null;
+
+                this.src = "https://img.youtube.com/vi/" + youtubeId + "/hqdefault.jpg";
+
+            };
+
+        } else {
+
+            youtubeThumbnail.src = film.poster_url || "";
+
+        }
+
+
+
+        youtubePlayer.style.display = "flex";
+
+                youtubePlayer.title = playlistUrl ? "Ouvrir la playlist sur YouTube" : "Regarder sur YouTube";
+
+        youtubePlayer.onclick = function () {
+            // Lecture intégrée sur MACHIFLIX : vidéo seule ou playlist complète.
+            let embedUrl = "";
+            if (playlistUrl) {
+                const playlistId = new URL(playlistUrl).searchParams.get("list");
+                embedUrl = youtubeId
+                    ? "https://www.youtube.com/embed/" + encodeURIComponent(youtubeId) + "?list=" + encodeURIComponent(playlistId) + "&autoplay=1"
+                    : "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(playlistId) + "&autoplay=1";
+            } else if (youtubeId) {
+                embedUrl = "https://www.youtube.com/embed/" + encodeURIComponent(youtubeId) + "?autoplay=1";
+            }
+            if (!embedUrl) return;
+            youtubePlayer.innerHTML = "";
+            youtubePlayer.style.cursor = "default";
+            youtubePlayer.style.display = "block";
+            youtubePlayer.onclick = null;
+            const iframe = document.createElement("iframe");
+            iframe.src = embedUrl;
+            iframe.title = playlistUrl ? "Lecteur de série MACHIFLIX" : "Lecteur vidéo MACHIFLIX";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = "origin";
+            iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;";
+            youtubePlayer.appendChild(iframe);
+        };
+
+        return;
+
+    }
+
+
+
+
+
+    /* =====================================================
+
+       FICHIER VIDEO
+
+
+
+    ===================================================== */
+
+
+
+
+
+
+
+    videoPlayer.src =
+
+
+
+        videoUrl;
+
+
+
+
+
+
+
+
+
+
+
+    videoPlayer.style.display =
+
+
+
+        "block";
+
+
+
+
+
+
+
+
+
+
+
+    videoPlayer.load();
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+
+       Erreur de lecture du fichier
+
+
+
+    */
+
+
+
+
+
+
+
+    videoPlayer.onerror =
+
+
+
+        function(){
+
+
+
+
+
+
+
+            console.error(
+
+
+
+                "Impossible de lire la vidéo:",
+
+
+
+                videoUrl
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+            videoPlayer.style.display =
+
+
+
+                "none";
+
+
+
+
+
+
+
+
+
+
+
+            noVideo.textContent =
+
+
+
+                "❌ Impossible de lire cette vidéo.";
+
+
+
+
+
+
+
+
+
+
+
+            noVideo.style.display =
+
+
+
+                "flex";
+
+
+
+
+
+
+
+        };
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   FILM INTROUVABLE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+
+/* =========================================================
+   SAISONS DE SÉRIE — les saisons s'affichent sous l'affiche.
+   Le clic sur une saison lance sa playlist dans le lecteur
+   principal : les épisodes se sélectionnent dans YouTube.
+========================================================= */
+function filmIsSeries(film) {
+  let genres = film?.genre;
+  if (typeof genres === "string") {
+    try { genres = JSON.parse(genres); } catch { genres = [genres]; }
+  }
+  if (!Array.isArray(genres)) genres = genres ? [genres] : [];
+  return genres.some(g => String(g).toLowerCase() === "série" || String(g).toLowerCase() === "serie");
+}
+
+function seriesPlaylistId(value) {
+  try { return new URL(value).searchParams.get("list"); } catch { return null; }
+}
+
+async function loadSeriesSeasonsForPage(film) {
+  const section = document.getElementById("seriesSections");
+  const grid = document.getElementById("seriesSeasonGrid");
+  const episodes = document.getElementById("seriesEpisodes");
+  if (!section || !grid || !episodes) return;
+
+  section.style.display = "none";
+  grid.replaceChildren();
+  episodes.replaceChildren();
+  episodes.hidden = true;
+
+  if (!filmIsSeries(film)) return;
+  section.style.display = "block";
+
+  const { data, error } = await supabaseClient
+    .from("series_seasons")
+    .select("id, series_id, season_number, playlist_url")
+    .eq("series_id", String(film.id))
+    .order("season_number", { ascending: true });
+
+  if (error) {
+    console.warn("Impossible de charger les saisons:", error.message);
+    episodes.hidden = false;
+    const note = document.createElement("p");
+    note.className = "series-episodes-note";
+    note.textContent = "Les saisons ne sont pas disponibles. Vérifie la table series_seasons et ses autorisations Supabase.";
+    episodes.appendChild(note);
+    return;
+  }
+
+  const seasons = data || [];
+  if (!seasons.length) {
+    episodes.hidden = false;
+    const note = document.createElement("p");
+    note.className = "series-episodes-note";
+    note.textContent = "Aucune saison enregistrée pour cette série dans Supabase.";
+    episodes.appendChild(note);
+    return;
+  }
+
+  seasons.forEach((season) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "series-season-card";
+    button.setAttribute("aria-pressed", "false");
+
+    const image = document.createElement("img");
+    image.src = film.poster_url || film.poster || "";
+    image.alt = `Saison ${season.season_number}`;
+    image.loading = "lazy";
+
+    const label = document.createElement("strong");
+    label.textContent = `Saison ${season.season_number}`;
+    button.append(image, label);
+
+    button.addEventListener("click", async () => {
+      grid.querySelectorAll(".series-season-card").forEach(card => {
+        card.classList.remove("active");
+        card.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+
+      episodes.hidden = false;
+      episodes.replaceChildren();
+
+      const heading = document.createElement("h3");
+      heading.textContent = `Saison ${season.season_number} — épisodes`;
+      episodes.appendChild(heading);
+
+      const playlistId = seriesPlaylistId(season.playlist_url);
+      if (!playlistId) {
+        const note = document.createElement("p");
+        note.className = "series-episodes-note";
+        note.textContent = "Le lien de la playlist YouTube n'est pas valide. Vérifie playlist_url dans Supabase.";
+        episodes.appendChild(note);
+        return;
+      }
+
+      const apiKey = typeof YOUTUBE_API_KEY !== "undefined" ? YOUTUBE_API_KEY.trim() : "";
+      if (!apiKey || apiKey === "COLLE_TA_CLE_YOUTUBE_API_ICI") {
+        const note = document.createElement("p");
+        note.className = "series-episodes-note";
+        note.textContent = "Ajoute ta vraie clé YouTube Data API v3 dans config.js pour afficher les épisodes en cartes.";
+        episodes.appendChild(note);
+        return;
+      }
+
+      const loadingNote = document.createElement("p");
+      loadingNote.className = "series-episodes-note";
+      loadingNote.textContent = "Chargement des épisodes…";
+      episodes.appendChild(loadingNote);
+
+      try {
+        const items = [];
+        let pageToken = "";
+        // Récupère toutes les pages de la playlist, pas seulement les 50 premiers épisodes.
+        do {
+          const params = new URLSearchParams({
+            part: "snippet,contentDetails",
+            maxResults: "50",
+            playlistId: playlistId,
+            key: apiKey
+          });
+          if (pageToken) params.set("pageToken", pageToken);
+          const response = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`);
+          const result = await response.json();
+
+          if (!response.ok || result.error) {
+            const apiMessage = result?.error?.message || `Erreur HTTP ${response.status}`;
+            throw new Error(apiMessage);
+          }
+
+          items.push(...(result.items || []));
+          pageToken = result.nextPageToken || "";
+        } while (pageToken);
+
+        episodes.replaceChildren();
+        episodes.appendChild(heading);
+
+        const validItems = items.filter(item => {
+          const snippet = item.snippet || {};
+          const resource = snippet.resourceId || {};
+          return resource.kind === "youtube#video" && resource.videoId &&
+            snippet.title && snippet.title !== "Deleted video" && snippet.title !== "Private video";
+        });
+
+        if (!validItems.length) {
+          const note = document.createElement("p");
+          note.className = "series-episodes-note";
+          note.textContent = "Aucun épisode public trouvé dans cette playlist YouTube.";
+          episodes.appendChild(note);
+          return;
+        }
+
+        const episodeGrid = document.createElement("div");
+        episodeGrid.className = "series-episode-grid";
+
+        validItems.forEach((item, index) => {
+          const snippet = item.snippet;
+          const videoId = snippet.resourceId.videoId;
+          const title = snippet.title;
+          const thumbs = snippet.thumbnails || {};
+          const thumbUrl = (thumbs.medium && thumbs.medium.url) ||
+            (thumbs.high && thumbs.high.url) ||
+            (thumbs.default && thumbs.default.url) ||
+            `https://i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
+
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = "series-episode-card";
+          card.setAttribute("aria-label", `Lire l'épisode ${index + 1} : ${title}`);
+
+          const thumb = document.createElement("div");
+          thumb.className = "series-episode-thumb";
+          const img = document.createElement("img");
+          img.src = thumbUrl;
+          img.alt = "";
+          img.loading = "lazy";
+          const play = document.createElement("span");
+          play.className = "series-episode-play";
+          play.textContent = "▶";
+          thumb.append(img, play);
+
+          const titleEl = document.createElement("span");
+          titleEl.className = "series-episode-title";
+          titleEl.textContent = title;
+
+          const numberEl = document.createElement("span");
+          numberEl.className = "series-episode-number";
+          numberEl.textContent = `Épisode ${index + 1}`;
+
+          card.append(thumb, titleEl, numberEl);
+          card.addEventListener("click", () => {
+            episodeGrid.querySelectorAll(".series-episode-card").forEach(c => c.classList.remove("active"));
+            card.classList.add("active");
+            playSeriesEpisode(videoId, title, season.season_number, film);
+          });
+          episodeGrid.appendChild(card);
+        });
+
+        episodes.appendChild(episodeGrid);
+      } catch (err) {
+        console.error("Erreur de chargement des épisodes YouTube:", err);
+        episodes.replaceChildren();
+        episodes.appendChild(heading);
+        const note = document.createElement("p");
+        note.className = "series-episodes-note";
+        note.textContent = `Impossible de récupérer les épisodes YouTube : ${err.message}. Vérifie la clé API, l'activation de YouTube Data API v3 et les restrictions de la clé.`;
+        episodes.appendChild(note);
+      }
+    });
+
+    grid.appendChild(button);
+  });
+
+  const hint = document.createElement("p");
+  hint.className = "series-episodes-note";
+  hint.textContent = "Choisis une saison pour afficher ses épisodes en cartes.";
+  episodes.appendChild(hint);
+  episodes.hidden = false;
+
+  // Sélectionne la première saison pour charger directement les cartes d'épisodes.
+  const first = grid.querySelector(".series-season-card");
+  if (first) first.click();
+}
+
+function playSeriesEpisode(videoId, title, seasonNumber, film) {
+  // Garde le lecteur principal existant et lance l'épisode choisi dans celui-ci.
+  videoPlayer.pause();
+  videoPlayer.style.display = "none";
+  noVideo.style.display = "none";
+  youtubeThumbnail.style.display = "none";
+  youtubePlayer.innerHTML = "";
+  youtubePlayer.style.display = "block";
+  youtubePlayer.style.cursor = "default";
+  youtubePlayer.style.position = "relative";
+  youtubePlayer.style.aspectRatio = "16 / 9";
+  youtubePlayer.style.height = "auto";
+  youtubePlayer.style.minHeight = "300px";
+
+  const frame = document.createElement("iframe");
+  frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+  frame.title = `${title} — Saison ${seasonNumber} — ${film.title || "MACHIFLIX"}`;
+  frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  frame.allowFullscreen = true;
+  frame.referrerPolicy = "strict-origin-when-cross-origin";
+  frame.style.cssText = "width:100%;height:100%;min-height:300px;border:0;position:absolute;inset:0;";
+  youtubePlayer.appendChild(frame);
+}
+
+function showNotFound(){
+
+
+
+
+
+
+
+    loading.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+    filmContent.style.display =
+
+
+
+        "none";
+
+
+
+
+
+
+
+    notFound.style.display =
+
+
+
+        "block";
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   FAVORI
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+async function checkFavorite(){
+
+
+
+
+
+
+
+    if(!currentUser){
+
+
+
+
+
+
+
+        favoriteButton.textContent =
+
+
+
+            "🔐 Connecte-toi pour ajouter aux favoris";
+
+
+
+
+
+
+
+
+
+
+
+        favoriteButton.classList.remove(
+
+
+
+            "active"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    const {
+
+
+
+        data,
+
+
+
+        error
+
+
+
+    } =
+
+
+
+        await supabaseClient
+
+
+
+        .from("favorites")
+
+
+
+        .select("id")
+
+
+
+        .eq(
+
+
+
+            "user_id",
+
+
+
+            currentUser.id
+
+
+
+        )
+
+
+
+        .eq(
+
+
+
+            "machinima_id",
+
+
+
+            currentFilm.id
+
+
+
+        )
+
+
+
+        .maybeSingle();
+
+
+
+
+
+
+
+
+
+
+
+    if(error){
+
+
+
+
+
+
+
+        console.error(
+
+
+
+            "Erreur favori:",
+
+
+
+            error
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+        favoriteButton.textContent =
+
+
+
+            "❤️ Ajouter aux favoris";
+
+
+
+
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    if(data){
+
+
+
+
+
+
+
+        favoriteButton.textContent =
+
+
+
+            "💔 Retirer des favoris";
+
+
+
+
+
+
+
+
+
+
+
+        favoriteButton.classList.add(
+
+
+
+            "active"
+
+
+
+        );
+
+
+
+
+
+
+
+    }else{
+
+
+
+
+
+
+
+        favoriteButton.textContent =
+
+
+
+            "❤️ Ajouter aux favoris";
+
+
+
+
+
+
+
+
+
+
+
+        favoriteButton.classList.remove(
+
+
+
+            "active"
+
+
+
+        );
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   AJOUT / RETRAIT FAVORI
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+favoriteButton.addEventListener(
+
+
+
+    "click",
+
+
+
+    async function(){
+
+
+
+
+
+
+
+        hideMessage();
+
+
+
+
+
+
+
+
+
+
+
+        if(!currentUser){
+
+
+
+
+
+
+
+            window.location.href =
+
+
+
+                "login.html?redirect=" +
+
+
+
+                encodeURIComponent(
+
+
+
+                    window.location.href
+
+
+
+                );
+
+
+
+
+
+
+
+
+
+
+
+            return;
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        favoriteButton.disabled =
+
+
+
+            true;
+
+
+
+
+
+
+
+
+
+
+
+        try{
+
+
+
+
+
+
+
+            const {
+
+
+
+                data:existing,
+
+
+
+                error:checkError
+
+
+
+            } =
+
+
+
+                await supabaseClient
+
+
+
+                .from("favorites")
+
+
+
+                .select("id")
+
+
+
+                .eq(
+
+
+
+                    "user_id",
+
+
+
+                    currentUser.id
+
+
+
+                )
+
+
+
+                .eq(
+
+
+
+                    "machinima_id",
+
+
+
+                    currentFilm.id
+
+
+
+                )
+
+
+
+                .maybeSingle();
+
+
+
+
+
+
+
+
+
+
+
+            if(checkError){
+
+
+
+
+
+
+
+                throw checkError;
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            /* =================================================
+
+
+
+               RETIRER
+
+
+
+            ================================================= */
+
+
+
+
+
+
+
+            if(existing){
+
+
+
+
+
+
+
+                const {
+
+
+
+                    error
+
+
+
+                } =
+
+
+
+                    await supabaseClient
+
+
+
+                    .from("favorites")
+
+
+
+                    .delete()
+
+
+
+                    .eq(
+
+
+
+                        "id",
+
+
+
+                        existing.id
+
+
+
+                    );
+
+
+
+
+
+
+
+
+
+
+
+                if(error){
+
+
+
+
+
+
+
+                    throw error;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+                favoriteButton.textContent =
+
+
+
+                    "❤️ Ajouter aux favoris";
+
+
+
+
+
+
+
+
+
+
+
+                favoriteButton.classList.remove(
+
+
+
+                    "active"
+
+
+
+                );
+
+
+
+
+
+
+
+
+
+
+
+                showMessage(
+
+
+
+                    "Favori retiré.",
+
+
+
+                    "success"
+
+
+
+                );
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            /* =================================================
+
+
+
+               AJOUTER
+
+
+
+            ================================================= */
+
+
+
+
+
+
+
+            else{
+
+
+
+
+
+
+
+                const {
+
+
+
+                    error
+
+
+
+                } =
+
+
+
+                    await supabaseClient
+
+
+
+                    .from("favorites")
+
+
+
+                    .insert({
+
+
+
+
+
+
+
+                        user_id:
+
+
+
+                            currentUser.id,
+
+
+
+
+
+
+
+                        machinima_id:
+
+
+
+                            currentFilm.id
+
+
+
+
+
+
+
+                    });
+
+
+
+
+
+
+
+
+
+
+
+                if(error){
+
+
+
+
+
+
+
+                    throw error;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+                favoriteButton.textContent =
+
+
+
+                    "💔 Retirer des favoris";
+
+
+
+
+
+
+
+
+
+
+
+                favoriteButton.classList.add(
+
+
+
+                    "active"
+
+
+
+                );
+
+
+
+
+
+
+
+
+
+
+
+                showMessage(
+
+
+
+                    "❤️ Film ajouté aux favoris !",
+
+
+
+                    "success"
+
+
+
+                );
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+        }catch(error){
+
+
+
+
+
+
+
+            console.error(
+
+
+
+                "Erreur favoris:",
+
+
+
+                error
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+            showMessage(
+
+
+
+                "❌ Impossible de modifier les favoris : " +
+
+
+
+                error.message,
+
+
+
+                "error"
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+        }finally{
+
+
+
+
+
+
+
+            favoriteButton.disabled =
+
+
+
+                false;
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+
+
+
+   DEMARRAGE
+
+
+
+\========================================================= */
+
+
+
+
+
+
+
+async function init(){
+
+
+
+
+
+
+
+    await loadUser();
+
+
+
+
+
+
+
+    await loadFilm();
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+init();
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+</html>
