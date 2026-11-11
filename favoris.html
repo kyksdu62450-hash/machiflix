@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Mes favoris - MACHINIMA</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+
+    background:#080808;
+
+    color:white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    background:
+        rgba(8,8,8,.95);
+
+    border-bottom:1px solid #222;
+
+    backdrop-filter:blur(12px);
+}
+
+
+.logo{
+
+    color:#ff174f;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-decoration:none;
+}
+
+
+.back{
+
+    margin-left:auto;
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    font-size:14px;
+}
+
+
+.back:hover{
+    color:white;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+
+    width:
+        min(
+            1200px,
+            calc(100% - 40px)
+        );
+
+    margin:auto;
+
+    padding:
+        45px 0 80px;
+}
+
+
+h1{
+
+    margin:0 0 10px;
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            48px
+        );
+}
+
+
+.subtitle{
+
+    margin-bottom:30px;
+
+    color:#777;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   RECHERCHE
+========================= */
+
+.search{
+
+    width:100%;
+
+    margin-bottom:30px;
+}
+
+
+.search input{
+
+    width:100%;
+
+    padding:15px 17px;
+
+    border:
+        1px solid #333;
+
+    border-radius:8px;
+
+    outline:none;
+
+    background:#111;
+
+    color:white;
+
+    font-size:15px;
+}
+
+
+.search input:focus{
+
+    border-color:#ff174f;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.movies{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(220px,1fr)
+        );
+
+    gap:22px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.movie-card{
+
+    overflow:hidden;
+
+    background:#111;
+
+    border:
+        1px solid #222;
+
+    border-radius:10px;
+
+    transition:
+        transform .2s,
+        border-color .2s;
+}
+
+
+.movie-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:#444;
+}
+
+
+.poster{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
+
+    background:#1a1a1a;
+}
+
+
+.poster img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:
+        transform .3s;
+}
+
+
+.movie-card:hover
+.poster img{
+
+    transform:
+        scale(1.04);
+}
+
+
+.no-poster{
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#555;
+
+    font-size:40px;
+}
+
+
+/* =========================
+   CARD INFO
+========================= */
+
+.info{
+
+    padding:15px;
+}
+
+
+.title{
+
+    margin-bottom:7px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+.meta{
+
+    color:#777;
+
+    font-size:12px;
+
+    margin-bottom:13px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+}
+
+
+.button{
+
+    flex:1;
+
+    padding:
+        9px 10px;
+
+    border:
+        1px solid #333;
+
+    border-radius:6px;
+
+    background:#151515;
+
+    color:#ccc;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+
+.button:hover{
+
+    border-color:#ff174f;
+
+    color:white;
+}
+
+
+.remove{
+
+    border-color:#44202a;
+
+    color:#ff6b8b;
+}
+
+
+.remove:hover{
+
+    background:#ff174f;
+
+    border-color:#ff174f;
+
+    color:white;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    padding:
+        80px 20px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+
+.empty-icon{
+
+    margin-bottom:15px;
+
+    font-size:50px;
+}
+
+
+.empty h2{
+
+    margin:
+        0 0 10px;
+
+    color:#aaa;
+
+    font-size:22px;
+}
+
+
+.empty p{
+
+    margin:
+        0 0 25px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    padding:
+        80px 20px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+
+    padding:
+        80px 20px;
+
+    text-align:center;
+
+    color:#ff174f;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    header{
+
+        padding:
+            0 20px;
+    }
+
+
+    main{
+
+        width:
+            calc(100% - 30px);
+
+        padding-top:30px;
+    }
+
+
+    .movies{
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+
+        gap:12px;
+    }
+
+
+    .info{
+
+        padding:11px;
+    }
+
+
+    .title{
+
+        font-size:14px;
+    }
+
+
+    .actions{
+
+        flex-direction:column;
+    }
+
+}
+
+
+@media(max-width:430px){
+
+    .movies{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+
+<a
+    href="index.html"
+    class="logo"
+>
+    MACHINIMA
+</a>
+
+
+<a
+    href="index.html"
+    class="back"
+>
+    ← Accueil
+</a>
+
+
+</header>
+
+
+
+<main>
+
+
+<h1>
+❤️ Mes favoris
+</h1>
+
+
+<div class="subtitle">
+
+Retrouve ici tous les machinimas
+que tu as sauvegardés.
+
+</div>
+
+
+<div class="search">
+
+<input
+    id="search"
+    type="search"
+    placeholder="Rechercher dans mes favoris..."
+    autocomplete="off"
+>
+
+</div>
+
+
+<div
+    id="content"
+>
+
+
+<div class="loading">
+Chargement de tes favoris...
+</div>
+
+
+</div>
+
+
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const {
+    createClient
+} = window.supabase;
+
+
+const supabaseClient =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const content =
+    document.getElementById(
+        "content"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "search"
+    );
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let favorites = [];
+
+
+/* =========================
+   SESSION
+========================= */
+
+async function getUser(){
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .auth
+        .getSession();
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        return null;
+    }
+
+
+    if(!data.session){
+
+        return null;
+    }
+
+
+    return data.session.user;
+
+}
+
+
+/* =========================
+   CARTE
+========================= */
+
+function createCard(
+    favorite
+){
+
+    const movie =
+        favorite.machinimas;
+
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "movie-card";
+
+
+    const poster =
+        document.createElement(
+            "div"
+        );
+
+
+    poster.className =
+        "poster";
+
+
+    if(movie.poster_url){
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            movie.poster_url;
+
+
+        image.alt =
+            movie.title ||
+            "Machinima";
+
+
+        image.loading =
+            "lazy";
+
+
+        poster.appendChild(
+            image
+        );
+
+    }else{
+
+        const noPoster =
+            document.createElement(
+                "div"
+            );
+
+
+        noPoster.className =
+            "no-poster";
+
+
+        noPoster.textContent =
+            "🎬";
+
+
+        poster.appendChild(
+            noPoster
+        );
+
+    }
+
+
+    const info =
+        document.createElement(
+            "div"
+        );
+
+
+    info.className =
+        "info";
+
+
+    const title =
+        document.createElement(
+            "div"
+        );
+
+
+    title.className =
+        "title";
+
+
+    title.textContent =
+        movie.title ||
+        "Sans titre";
+
+
+    const meta =
+        document.createElement(
+            "div"
+        );
+
+
+    meta.className =
+        "meta";
+
+
+    const metaParts = [];
+
+
+    if(movie.category){
+
+        metaParts.push(
+            movie.category
+        );
+
+    }
+
+
+    if(movie.year){
+
+        metaParts.push(
+            movie.year
+        );
+
+    }
+
+
+    meta.textContent =
+        metaParts.join(
+            " • "
+        );
+
+
+    const actions =
+        document.createElement(
+            "div"
+        );
+
+
+    actions.className =
+        "actions";
+
+
+    const watch =
+        document.createElement(
+            "a"
+        );
+
+
+    watch.className =
+        "button";
+
+
+    watch.href =
+        "film.html?id=" +
+        encodeURIComponent(
+            movie.id
+        );
+
+
+    watch.textContent =
+        "▶ Regarder";
+
+
+    const remove =
+        document.createElement(
+            "button"
+        );
+
+
+    remove.className =
+        "button remove";
+
+
+    remove.type =
+        "button";
+
+
+    remove.textContent =
+        "♥ Retirer";
+
+
+    remove.addEventListener(
+        "click",
+        function(){
+
+            removeFavorite(
+                favorite.id
+            );
+
+        }
+    );
+
+
+    actions.appendChild(
+        watch
+    );
+
+
+    actions.appendChild(
+        remove
+    );
+
+
+    info.appendChild(
+        title
+    );
+
+
+    info.appendChild(
+        meta
+    );
+
+
+    info.appendChild(
+        actions
+    );
+
+
+    card.appendChild(
+        poster
+    );
+
+
+    card.appendChild(
+        info
+    );
+
+
+    return card;
+
+}
+
+
+/* =========================
+   AFFICHAGE
+========================= */
+
+function renderFavorites(){
+
+    const search =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const filtered =
+        favorites.filter(
+            function(favorite){
+
+                const movie =
+                    favorite.machinimas;
+
+
+                const title =
+                    (
+                        movie.title ||
+                        ""
+                    ).toLowerCase();
+
+
+                const category =
+                    (
+                        movie.category ||
+                        ""
+                    ).toLowerCase();
+
+
+                return (
+                    !search ||
+                    title.includes(
+                        search
+                    ) ||
+                    category.includes(
+                        search
+                    )
+                );
+
+            }
+        );
+
+
+    content.innerHTML =
+        "";
+
+
+    if(
+        favorites.length === 0
+    ){
+
+        content.innerHTML =
+            `
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ♡
+                </div>
+
+                <h2>
+                    Aucun favori
+                </h2>
+
+                <p>
+                    Tu n'as pas encore ajouté
+                    de machinima à tes favoris.
+                </p>
+
+                <a
+                    href="index.html"
+                    class="button"
+                >
+                    🎬 Découvrir les machinimas
+                </a>
+
+            </div>
+            `;
+
+        return;
+    }
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        content.innerHTML =
+            `
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h2>
+                    Aucun résultat
+                </h2>
+
+                <p>
+                    Aucun de tes favoris
+                    ne correspond à ta recherche.
+                </p>
+
+            </div>
+            `;
+
+        return;
+    }
+
+
+    const grid =
+        document.createElement(
+            "div"
+        );
+
+
+    grid.className =
+        "movies";
+
+
+    filtered.forEach(
+        function(favorite){
+
+            grid.appendChild(
+                createCard(
+                    favorite
+                )
+            );
+
+        }
+    );
+
+
+    content.appendChild(
+        grid
+    );
+
+}
+
+
+/* =========================
+   CHARGER FAVORIS
+========================= */
+
+async function loadFavorites(){
+
+    content.innerHTML =
+        `
+        <div class="loading">
+            Chargement de tes favoris...
+        </div>
+        `;
+
+
+    const user =
+        await getUser();
+
+
+    /*
+    Utilisateur non connecté
+    */
+
+    if(!user){
+
+        content.innerHTML =
+            `
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🔐
+                </div>
+
+                <h2>
+                    Connecte-toi
+                </h2>
+
+                <p>
+                    Tu dois être connecté
+                    pour voir tes favoris.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+            `;
+
+        searchInput.disabled =
+            true;
+
+        return;
+
+    }
+
+
+    /*
+    Récupération des favoris
+    */
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("favorites")
+        .select(`
+            id,
+            machinima_id,
+            created_at,
+            machinimas (
+                id,
+                title,
+                description,
+                category,
+                year,
+                poster_url,
+                video_url
+            )
+        `)
+        .eq(
+            "user_id",
+            user.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "Erreur favoris:",
+            error
+        );
+
+
+        content.innerHTML =
+            `
+            <div class="error">
+                ❌ Impossible de charger tes favoris.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    favorites =
+        (data || [])
+        .filter(
+            function(item){
+
+                return item.machinimas;
+
+            }
+        );
+
+
+    renderFavorites();
+
+}
+
+
+/* =========================
+   SUPPRIMER FAVORI
+========================= */
+
+async function removeFavorite(
+    favoriteId
+){
+
+    const user =
+        await getUser();
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from("favorites")
+        .delete()
+        .eq(
+            "id",
+            favoriteId
+        )
+        .eq(
+            "user_id",
+            user.id
+        );
+
+
+    if(error){
+
+        console.error(
+            "Erreur suppression:",
+            error
+        );
+
+        alert(
+            "Impossible de retirer ce favori."
+        );
+
+        return;
+
+    }
+
+
+    favorites =
+        favorites.filter(
+            function(item){
+
+                return (
+                    item.id !==
+                    favoriteId
+                );
+
+            }
+        );
+
+
+    renderFavorites();
+
+}
+
+
+/* =========================
+   RECHERCHE
+========================= */
+
+searchInput.addEventListener(
+    "input",
+    renderFavorites
+);
+
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+loadFavorites();
+
+</script>
+
+
+</body>
+
+</html>
